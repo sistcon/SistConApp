@@ -77,6 +77,7 @@ public class ReservaServiceImpl implements ReservaService {
 	}
         
         
+        
 	@Override
 	@Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
 	public void validar(Reserva entidade, BindingResult validacao) {

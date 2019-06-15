@@ -7,6 +7,7 @@ package com.app.sistconApp.service;
 
 import com.app.sistconApp.modelo.Reserva;
 
+
 /**
  *
  * @author Jadna Cavalcante
@@ -14,4 +15,5 @@ import com.app.sistconApp.modelo.Reserva;
 
 public interface ReservaService extends CrudService<Reserva,Long> {
     
+   
 }

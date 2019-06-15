@@ -13,7 +13,7 @@
 			<h6>Condomínio não cadastrado</h6>
 			Para cadastrar reservas é preciso completar o cadastro do seu condomínio, <a class="text-warning" th:href="@{/sindico/condominio/cadastro}">clique aqui</a>.
 		</div>
-		<p th:if="${haCondominio}" th:text="${reserva.idReserva == null} ? 'Ao salvar, um novo reserva será criado no condomínio.' : (${param.somenteLeitura} ? 'As informações não podem ser alteradas neste modo.' :  'Ao salvar, as informações do reserva atual serão atualizadas.')"></p>
+		<p th:if="${haCondominio}" th:text="${reserva.idReserva == null} ? 'Ao salvar, uma nova reserva será adicionada no condomínio.' : (${param.somenteLeitura} ? 'As informações não podem ser alteradas neste modo.' :  'Ao salvar, as informações do reserva atual serão atualizadas.')"></p>
 		<form th:if="${haCondominio}" th:action="@{/sindico/reservas/cadastro}" th:object="${reserva}" th:method="${reserva.idReserva == null} ? post : put" novalidate>
 			<fieldset th:disabled="${param.somenteLeitura}" class="mb-3">
 				<input type="hidden" th:field="*{condominio}" /> <input type="hidden" th:field="*{idReserva}" />
@@ -21,25 +21,49 @@
 					<ul class="list-group list-group-flush">
 						<li class="list-group-item">
 							<p class="text-primary">
-								<i class="fas fa-building"></i> Informações principais
+								<!--<i class="far fa-calendar-alt"></i> Calendário-->
 							</p>
 							<div class="form-row">
-								<div class="form-group col-md-2">
-									<label>Sigla</label> <input autofocus class="form-control" type="text" th:errorclass="is-invalid" th:field="*{sigla}" placeholder="Uma abrevitura" />
-									<div class="invalid-feedback" th:errors="*{sigla}"></div>
+								<div class="form-group" th:classappend="${reserva.idReserva == null}?'col-md-3':'col-md-4'">
+									<label><i class="far fa-calendar-alt bg-light"></i> Data da Reserva</label> <input autofocus class="form-control" type="date" th:errorclass="is-invalid" th:field="*{dia}" placeholder="Dia da reserva" />
+									<div class="invalid-feedback" th:errors="*{dia}"></div>
 								</div>
-                                                            
-                                                          <div class="form-group col-md-4">
+                                                        
+						   
+                                                          <div class="form-group col-md-3">
 									<label>Área Comum</label> <select class="custom-select" id="tipo" th:errorclass="is-invalid" th:field="*{tipo}">
 										<option th:unless="${param.somenteLeitura}" value="" hidden="true">Selecione</option>
 										<option th:each="tipo : ${tipos}" th:value="${tipo}" th:text="${tipo.nome}"></option>
 									</select>
 									<div class="invalid-feedback" th:errors="*{tipo}"></div>
 								</div>
-							
                                                             
+                                                            <div class="form-row">
+								<div class="form-group col-md-2">
+									<label>Unidade</label> <input autofocus class="form-control" type="text" th:errorclass="is-invalid" th:field="*{sigla}" placeholder="Unidade" />
+									<div class="invalid-feedback" th:errors="*{sigla}"></div>
+								</div>
+							
+                                                            <div class="form-row">
+								<div class="form-group col-md-5">
+									<label>Quantidade</label> <input autofocus class="form-control" type="text" th:errorclass="is-invalid" th:field="*{quantidade}" placeholder="Quantidade" />
+									<div class="invalid-feedback" th:errors="*{quantidade}"></div>
+								</div>
+                                                            
+                                                            
+                                                                <div class="form-group col-md-6">
+									<label>Valor</label>
+									<div class="input-group">
+										<div class="input-group-prepend">
+											<span class="input-group-text">R$</span>
+										</div>
+										<input class="form-control last calc-add" type="number" step="0,0" th:errorclass="is-invalid" th:field="*{valor}" placeholder="Valor da reserva" />
+										<div class="invalid-feedback" th:errors="*{valor}"></div>
+									</div>
+                                                                
+                                                                
 								<div class="form-group col-md-10">
-									<label>Descrição</label> <input class="form-control" type="text" th:errorclass="is-invalid" th:field="*{descricao}" placeholder="Uma descrição completa" />
+									<label>Observação</label> <input class="form-control" type="text" th:errorclass="is-invalid" th:field="*{descricao}" placeholder="Descrição" />
 									<div class="invalid-feedback" th:errors="*{descricao}"></div>
 								</div>
 							</div>
@@ -47,8 +71,8 @@
 					</ul>
 				</div>
 			</fieldset>
-			<button th:unless="${param.somenteLeitura}" type="submit" class="btn btn-primary">Salvar</button>
-			<a class="btn btn-secondary" th:href="@{/sindico/reservas}" role="button" th:text="${param.somenteLeitura}?'Voltar':_">Cancelar</a>
+			<button th:unless="${param.somenteLeitura}" type="submit" class="btn btn-success">Salvar</button>
+			<a class="btn btn-danger" th:href="@{/sindico/reservas}" role="button" th:text="${param.somenteLeitura}?'Voltar':_">Cancelar</a>
 		</form>
 		</main>
 	</th:block>

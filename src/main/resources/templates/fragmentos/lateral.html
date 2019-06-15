@@ -35,9 +35,9 @@
                                     <li class="nav-item"><a class="nav-link" style="color:white" th:classappend="${ativo[0] == 'reservas'}? 'active'" href="#reservasdeSubmenu" data-toggle="collapse"> <i class="fas fa-calculator"></i> Reservas
 				</a>
 					<ul class="collapse list-unstyled" id="reservasdeSubmenu">
-						<li><a class="nav-link" th:classappend="${ativo[1] == 'churrasqueira'}? 'active'" th:href="@{/sindico/churrasqueira}" title="Cadastro de churrasqueira e Subcategorias">Churrasqueira</a></li>
-						<li><a class="nav-link" th:classappend="${ativo[1] == 'quadra'}? 'active'" th:href="@{/sindico/quadra}" title="Cadastro de quadra">Quadra</a></li>
-						<li><a class="nav-link" th:classappend="${ativo[1] == 'salao'}? 'active'" th:href="@{/sindico/salao}" title="Cadastro de Salao">Salão</a></li>
+						<li><a class="nav-link" th:classappend="${ativo[1] == 'cadastro'}? 'active'" th:href="@{/sindico/cadastro}" title="Cadastro cadastro e Subcategorias">Cadastro</a></li>
+						<li><a class="nav-link" th:classappend="${ativo[1] == 'efetivada'}? 'active'" th:href="@{/sindico/efetivada}" title="Cadastro efetivado">Efetivada</a></li>
+						<li><a class="nav-link" th:classappend="${ativo[1] == 'cancelada'}? 'active'" th:href="@{/sindico/cancelada}" title="Cadastro cancelado">Cancelada</a></li>
 						
 					</ul></li>    
                                         
