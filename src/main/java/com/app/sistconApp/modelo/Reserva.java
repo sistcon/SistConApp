@@ -69,6 +69,9 @@ public class Reserva implements Serializable, Comparable<Reserva>{
         @Size(max = 10)
 	private String descricao;
         
+        @Size(max = 255)
+	private String observacao;
+        
         @ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idcondominio")
 	private Condominio condominio;
@@ -136,6 +139,16 @@ public class Reserva implements Serializable, Comparable<Reserva>{
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
+
+    public String getObservacao() {
+        return observacao;
+    }
+
+    public void setObservacao(String observacao) {
+        this.observacao = observacao;
+    }
+    
+    
 
     public Condominio getCondominio() {
         return condominio;
