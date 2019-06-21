@@ -58,16 +58,15 @@ public class Reserva implements Serializable, Comparable<Reserva>{
 	@Enumerated(EnumType.STRING)
 	private TipoReserva tipo;
         
-        @Size(min = 2, max = 5)
+        @Size(min = 2, max = 100)
 	@NotBlank
-	private String quantidade;
+	private String convidado;
         
         @NotNull
 	@Min(0)
 	private BigDecimal valor;
         
-        @Size(max = 10)
-	private String descricao;
+        
         
         @Size(max = 255)
 	private String observacao;
@@ -114,13 +113,15 @@ public class Reserva implements Serializable, Comparable<Reserva>{
         this.tipo = tipo;
     }
 
-    public String getQuantidade() {
-        return quantidade;
+    public String getConvidado() {
+        return convidado;
     }
 
-    public void setQuantidade(String quantidade) {
-        this.quantidade = quantidade;
+    public void setConvidado(String convidado) {
+        this.convidado = convidado;
     }
+
+    
 
     public BigDecimal getValor() {
         return valor;
@@ -130,15 +131,6 @@ public class Reserva implements Serializable, Comparable<Reserva>{
         this.valor = valor;
     }
     
-    
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
 
     public String getObservacao() {
         return observacao;
