@@ -168,7 +168,7 @@ a {
 }
 
 a:hover {
-  color: #0056b3;
+  color: #000;
   text-decoration: underline;
 }
 
@@ -5151,7 +5151,7 @@ input[type="button"].btn-block {
 }
 
 .list-group-item-primary.list-group-item-action:hover, .list-group-item-primary.list-group-item-action:focus {
-  color: #004085;
+  color: #155724;
   background-color: #9fcdff;
 }
 

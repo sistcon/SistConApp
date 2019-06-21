@@ -23,10 +23,10 @@
 				</caption>
 				<thead class="thead-light">
 					<tr>
-                                                <th scope="col">Unidade</th>
-						<th scope="col">Descrição</th>
+                                                <th scope="col">Data</th>
+						<th scope="col">Unidade</th>
                                                 <th scope="col">Reserva Área</th>
-                                                <th scope="col">Quantidade</th>
+                                                <th scope="col">Convidados</th>
                                                 <th scope="col">Valor</th>
                                                 <th scope="col">Observações</th>
 						<th></th>
@@ -35,9 +35,13 @@
 				<tbody>
 					<tr th:each="reserva : ${reservas.content}">
                                                <!--<th scope="row" th:text="${#temporals.format(reserva.dia,'dd/MM/yyyy')}"></th>-->
-						<th scope="row" th:text="${reserva.sigla}"></th>
-						<td th:text="${reserva.descricao}"></td>
-                                                <td th:text="${reserva.tipo.nome}"></td>
+                                                <th scope="row" th:text="${#temporals.format(reserva.dia,'dd/MM/yyyy')}"></th>
+                                               <th scope="row" th:text="${reserva.sigla}"></th>
+						<td th:text="${reserva.tipo.nome}"></td>
+                                                <td th:text="${reserva.convidado}"></td>
+                                                <td th:text="'R$ ' + ${reserva.valor}"></td>
+                                               <td th:text="${reserva.observacao}"></td>
+                                               
 						<td><a class="btn btn-outline-secondary btn-sm" th:href="@{/sindico/reservas/{idReserva}/cadastro(idReserva=${reserva.idReserva},somenteLeitura)}"><i class="fas fa-eye"></i><span> Ver</span></a> <a class="btn btn-outline-primary btn-sm" th:href="@{/sindico/reserva/{idReserva}/cadastro(idReserva=${reserva.idReserva})}"><i class="fas fa-edit"></i><span> Editar</span></a> <a class="btn btn-outline-danger btn-sm" data-toggle="modal" href="#modalExcluir" th:data-idobj="${reserva.idReserva}" th:data-obs="${reserva}"><i class="fas fa-trash-alt"></i><span> Excluir</span></a></td>
 					</tr>
 				</tbody>
