@@ -4,7 +4,8 @@
 <body>
 	<th:block th:fragment="lateral">
 		<nav id="sidebar" class="bg-dark navbar-dark active d-print-none">
-			<div id="sidebarExpand" class="bg-secondary mt-2 mb-2 text-center d-none d-md-block" style="color:white"><i class="fas fa-exchange-alt"></i></div>
+                     <div class="card-header bg-secondary text-white">Menu</div>
+			<!--<div id="sidebarExpand" class="bg-secondary mt-2 mb-2 text-center d-none d-md-block" style="color:white"><i class="fas fa-exchange-alt"></i></div>-->
 			<ul class="list-unstyled navbar-nav">
 				<li class="nav-item"><a class="nav-link" style="color:white" th:classappend="${ativo[0] == 'painel'}? 'active'" th:href="@{/sindico/painel}" title="Painel do Condomínio"> <i class="fab fa-font-awesome-flag"></i> Painel
 				</a></li>
