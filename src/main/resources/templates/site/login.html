@@ -9,9 +9,14 @@
 <body>
 	<th:block th:fragment="conteudo">
 		<main role="main" class="container">
-		<div class="m-auto" style="max-width: 350px;">
-			<h3 class="font-weight-light mb-3">Entrar</h3>
-                        <!--<img th:src="@{/misc/sistcon1d.png}" width="100" height="50"/>-->
+		<div class="m-auto" style="max-width: 500px;">
+                    <div class="card">
+                        <li class="list-group-item bg-secondary">
+			
+                        <img th:src="@{/misc/sistcon3d.png}" width="150" height="60" class="logo img-responsive"/>
+                        <h5 class="font-weight-light mb-3 text-white">Sistema de Gerenciamneto de condomínio</h5>
+                        </li>
+                        
 			<div th:if="${param.erro}">
 				<div class="alert alert-danger">Usuário ou senha inválidos!</div>
 			</div>
@@ -28,26 +33,26 @@
 				<div class="alert alert-success">Sua conta foi criada, obrigado!</div>
 			</div>
 			<form th:action="@{/entrar}" th:method="post" class="needs-validation" autocomplete="off" novalidate>
-				<div class="card">
+				
 					<ul class="list-group list-group-flush" >
 						<li class="list-group-item bg-secondary"> <!--muda a cor background -->
 							<div class="form-group text-white"> <!--muda a cor do texto --->
-								<label>Usuário</label>
+								<label></label>
 								<div class="input-group">
-									<div class="input-group-prepend">
+									<!--<div class="input-group-prepend">
 										<span class="input-group-text"><i class="fas fa-user"></i></span>
-									</div>
-									<input class="form-control last" type="text" name="username" placeholder="Seu usuário" autofocus="autofocus" required />
+									</div>-->
+									<input class="form-control last" type="text" name="username" placeholder="usuário" autofocus="autofocus" required />
 									<div class="invalid-feedback" >Campo obrigatório</div>
 								</div>
 							</div>
 							<div class="form-group text-white">
-								<label>Senha</label>
+								<label></label>
 								<div class="input-group">
-									<div class="input-group-prepend">
+									<!--<div class="input-group-prepend">
 										<span class="input-group-text"><i class="fas fa-lock"></i></span>
-									</div>
-									<input class="form-control last" type="password" name="password" placeholder="Sua senha" required />
+									</div>-->
+									<input class="form-control last" type="password" name="password" placeholder="senha" required />
 									<div class="invalid-feedback">Campo obrigatório</div>
 								</div>
 								<small><a class="text-warning" th:href="@{/conta/redefinir}" tabindex="-1">Esqueci minha senha</a></small>

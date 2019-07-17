@@ -103,9 +103,9 @@ fieldset:disabled input::placeholder, fieldset:disabled textarea::placeholder{
 /* Sidebar */
 /* Sidebar expandido grande */
 #sidebar {
-	min-width: 250px;
-	max-width: 250px;
-	margin-top: 16px;
+	min-width: 200px; /*largura do menu expandido*/
+	max-width: 200px;
+	margin-top: 10px; /*altura do menu ao menu fixo acima*/
 	height: calc(100% - 88px); /* 88 = 56 + 16 + 16 */
 	transition: all 0.3s;
 	position: fixed;
@@ -116,7 +116,7 @@ fieldset:disabled input::placeholder, fieldset:disabled textarea::placeholder{
 }
 #sidebar ~ main {
 	padding-right: 16px;
-    padding-left: 96px; /* 80px devido ao sidebar + 16px */
+    padding-left: 200px; /* 80px devido ao sidebar + 16px */ /*fasta os blocos do painel para a direita*/
     width:100%;
     max-width:1222px;
     margin-left:auto;
@@ -132,7 +132,7 @@ fieldset:disabled input::placeholder, fieldset:disabled textarea::placeholder{
 	display: block;
 }
 #sidebar ul li a:hover {
-	background: #0069d9;
+	background: #28a745;
 }
 #sidebar ul ul a {
 	font-size: 0.9em !important;
@@ -148,7 +148,7 @@ fieldset:disabled input::placeholder, fieldset:disabled textarea::placeholder{
 	position: relative;
 }
 
-#sidebar a[data-toggle="collapse"]::before
+#sidebar a[data-toggle="collapse"]::before /*expande o conteudo interno do menu de cada item*/
 	{
 	content: '\f107';
 	font-family: 'FontAwesome';
@@ -172,8 +172,8 @@ fieldset:disabled input::placeholder, fieldset:disabled textarea::placeholder{
 }
 /*Sidebar comprimido pequeno*/
 #sidebar.active {
-	min-width: 80px;
-	max-width: 80px;
+	min-width: 200px; /*mudar o tamanho do bloco do menu(deixa mais largo) antes 80*/
+	max-width: 200px;
 	text-align: center;
 }
 #sidebar.active ul li a {
