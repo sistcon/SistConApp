@@ -17,12 +17,12 @@
 				<div class="card">
 					<ul class="list-group list-group-flush">
 						<li class="list-group-item">
-							<p class="text-primary">
+							<p class="text-success">
 								<i class="fas fa-building"></i> Informações principais
 							</p>
 
 							<div class="form-group">
-								<label>Razão Social</label> <input class="form-control" type="text" th:errorclass="is-invalid" th:field="*{razaoSocial}" placeholder="A razão social ou o nome do condomínio" autofocus />
+								<label>Razão Social</label> <input class="form-control" type="text" th:errorclass="is-invalid" th:field="*{razaoSocial}" placeholder="A razão social ou o nome do condomínio" autofocus/>
 								<div class="invalid-feedback" th:errors="*{razaoSocial}"></div>
 							</div>
 							<div class="form-row">
@@ -42,7 +42,7 @@
 							</div>
 						</li>
 						<li class="list-group-item">
-							<p class="text-primary">
+							<p class="text-success">
 								<i class="fas fa-envelope"></i> Dados de contato
 							</p>
 							<div class="form-group">
@@ -63,7 +63,7 @@
 							</div>
 						</li>
 						<li class="list-group-item">
-							<p class="text-primary">
+							<p class="text-success">
 								<i class="fas fa-map-marker-alt"></i> Localização
 							</p>
 							<div class="form-row">
@@ -88,7 +88,7 @@
 							</div>
 							<div class="form-row">
 								<div class="form-group col-md-4">
-									<label>CEP <a class="text-secondary" tabindex="-1" href="http://www.buscacep.correios.com.br/sistemas/buscacep/buscaCep.cfm" title="Não sei o CEP" target="_blank"><i class="fas fa-question-circle"></i></a></label> <input class="form-control" type="number" th:errorclass="is-invalid" th:field="*{cep}" placeholder="O CEP do condominio" />
+									<label>CEP <a class="text-success" tabindex="-1" href="http://www.buscacep.correios.com.br/sistemas/buscacep/buscaCep.cfm" title="Não sei o CEP" target="_blank"><i class="fas fa-question-circle"></i></a></label> <input class="form-control" type="number" th:errorclass="is-invalid" th:field="*{cep}" placeholder="O CEP do condominio" />
 									<div class="invalid-feedback" th:errors="*{cep}"></div>
 									<small>Somente números</small>
 								</div>

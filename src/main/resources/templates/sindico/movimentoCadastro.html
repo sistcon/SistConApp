@@ -17,7 +17,7 @@
 				<div class="card">
 					<ul class="list-group list-group-flush" id="accordion">
 						<li class="list-group-item">
-							<p class="text-primary">
+							<p class="text-success">
 								<i class="fas fa-list"></i> Tipo de movimento
 							</p>
 							<div class="form-row">
@@ -32,7 +32,7 @@
 							</div>
 						</li>
 						<li class="list-group-item">
-							<p class="text-primary">
+							<p class="text-success">
 								<i class="fas fa-file-invoice-dollar"></i> Informações principais
 							</p>
 							<div class="form-row">
@@ -63,7 +63,7 @@
 							</div>
 						</li>
 						<li class="list-group-item collapse show" id="L" th:if="${#ctx.tipo == T(app.condominio.domain.enums.TipoClasseMovimento).L}">
-							<p class="text-primary">
+							<p class="text-success">
 								<i class="fas fa-coins"></i> Detalhes do lançamento
 							</p>
 							<input type="hidden" th:field="*{periodo}" />
@@ -90,7 +90,7 @@
 							</div>
 						</li>
 						<li class="list-group-item collapse" id="L" th:unless="${#ctx.tipo == T(app.condominio.domain.enums.TipoClasseMovimento).L}">
-							<p class="text-primary">
+							<p class="text-success">
 								<i class="fas fa-coins"></i> Detalhes do lançamento
 							</p>
 							<div class="form-row">
@@ -115,7 +115,7 @@
 							</div>
 						</li>
 						<li class="list-group-item collapse show" id="T" th:if="${#ctx.tipo == T(app.condominio.domain.enums.TipoClasseMovimento).T}">
-							<p class="text-primary">
+							<p class="text-success">
 								<i class="fas fa-exchange-alt"></i> Detalhes da transferência
 							</p>
 							<input type="hidden" th:field="*{movimentoInverso}" />
