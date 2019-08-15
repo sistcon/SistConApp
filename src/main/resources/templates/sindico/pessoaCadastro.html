@@ -3,16 +3,16 @@
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
     <head>
 
-        <title>Condômino</title>
+        <title>Morador</title>
 
     </head>
     <body>
     <th:block th:fragment="conteudo">
         <main role="main">
-            <h3 class="font-weight-light">Cadastro do Condômino</h3>
+            <h3 class="font-weight-light">Cadastro de Moradores</h3>
             <div th:unless="${haCondominio}" class="alert alert-warning">
-                <h6>Condomínio não cadastrado</h6>
-                Para cadastrar condôminos é preciso completar o cadastro do seu condomínio, <a class="text-warning" th:href="@{/sindico/condominio/cadastro}">clique aqui</a>.
+                <h6>Morador não cadastrado</h6>
+                Para cadastrar um morador é preciso completar o cadastro do seu condomínio, <a class="text-warning" th:href="@{/sindico/condominio/cadastro}">clique aqui</a>.
             </div>
             <p th:if="${haCondominio}" th:text="${pessoa.idPessoa == null} ? 'Ao salvar, um novo condômino será criado no condomínio.' : (${param.somenteLeitura} ? 'As informações não podem ser alteradas neste modo.' :  'Ao salvar, as informações do condômino atual serão atualizadas.')"></p>
             <form th:class="${#ctx.tipo == ''}?'needs-validation'" novalidate th:action="@{/sindico/condominos/cadastro(${'P' + #ctx.tipo})}" th:if="${haCondominio}" th:object="${pessoa}" th:method="${pessoa.idPessoa == null} ? post : put">
@@ -22,7 +22,7 @@
                         <ul class="list-group list-group-flush" id="accordion">
                             <li class="list-group-item">
                                 <p class="text-primary">
-                                    <i class="fas fa-list"></i> Tipo de condômino
+                                    <i class="fas fa-list"></i> Tipo de Morador
                                 </p>
                                 <div class="form-row">
                                     <div class="form-group col-md-4">
@@ -180,10 +180,10 @@
                                 <p class="text-primary">
                                     <i class="fas fa-envelope"></i> Dados de contato
                                 </p>
-                            <!--     <div class="form-group">
+                              <div class="form-group">
                                     <label>E-mail</label> <input class="form-control" type="email" th:errorclass="is-invalid" th:field="*{email}" placeholder="O e-mail do condômino" />
                                     <div class="invalid-feedback" th:errors="*{email}"></div>
-                                </div> -->
+                                </div> 
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label>Telefone</label> <input class="form-control" type="tel" th:errorclass="is-invalid" th:field="*{telefone}" placeholder="Telefone com DDD" />

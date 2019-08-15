@@ -11,7 +11,6 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -24,7 +23,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-
 
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
@@ -40,44 +38,39 @@ import org.springframework.format.annotation.DateTimeFormat;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "reservas")
-public class Reserva implements Serializable, Comparable<Reserva>{
-        @Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "idreserva")
-	private Long idReserva;
-        
-        @NotNull
-	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-	private LocalDate dia;
-     
-        @Size(min = 2, max = 5)
-	@NotBlank
-	private String sigla;
+public class Reserva implements Serializable, Comparable<Reserva> {
 
-	@NotNull
-	@Enumerated(EnumType.STRING)
-	private TipoReserva tipo;
-        
-        @Size(min = 2, max = 100)
-	@NotBlank
-	private String convidado;
-        
-        @NotNull
-	@Min(0)
-	private BigDecimal valor;
-        
-        
-        
-        @Size(max = 255)
-	private String observacao;
-        
-        @ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idcondominio")
-	private Condominio condominio;
-        
-        /*@OneToMany(mappedBy = "reserva", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, orphanRemoval = true)
-	@OrderBy(value = "sigla")
-	private List<Condominio> condominios = new ArrayList<>();*/
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idreserva")
+    private Long idReserva;
+
+    @NotNull
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private LocalDate dia;
+
+    @Size(min = 2, max = 5)
+    @NotBlank
+    private String sigla;
+
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    private TipoReserva tipo;
+
+    @Size(min = 2, max = 100)
+    @NotBlank
+    private String convidado;
+
+    @NotNull
+    @Min(0)
+    private BigDecimal valor;
+
+    @Size(max = 255)
+    private String observacao;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idcondominio")
+    private Condominio condominio;
 
     public Long getIdReserva() {
         return idReserva;
@@ -94,8 +87,6 @@ public class Reserva implements Serializable, Comparable<Reserva>{
     public void setDia(LocalDate dia) {
         this.dia = dia;
     }
-    
-    
 
     public String getSigla() {
         return sigla;
@@ -121,8 +112,6 @@ public class Reserva implements Serializable, Comparable<Reserva>{
         this.convidado = convidado;
     }
 
-    
-
     public BigDecimal getValor() {
         return valor;
     }
@@ -130,7 +119,6 @@ public class Reserva implements Serializable, Comparable<Reserva>{
     public void setValor(BigDecimal valor) {
         this.valor = valor;
     }
-    
 
     public String getObservacao() {
         return observacao;
@@ -139,8 +127,6 @@ public class Reserva implements Serializable, Comparable<Reserva>{
     public void setObservacao(String observacao) {
         this.observacao = observacao;
     }
-    
-    
 
     public Condominio getCondominio() {
         return condominio;
@@ -149,18 +135,17 @@ public class Reserva implements Serializable, Comparable<Reserva>{
     public void setCondominio(Condominio condominio) {
         this.condominio = condominio;
     }
-    
-    @Override
-	public String toString() {
-		DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		return dia.format(formato);
-	}
 
-        /*@Override
+    @Override
+    public String toString() {
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return dia.format(formato);
+    }
+
+    /*@Override
 	public String toString() {
 		return sigla;
 	}*/
-
     @Override
     public int hashCode() {
         int hash = 3;
@@ -185,9 +170,9 @@ public class Reserva implements Serializable, Comparable<Reserva>{
         }
         return true;
     }
-    
+
     @Override
-	public int compareTo(Reserva o) {
-		return this.dia.compareTo(o.getDia());
-	}   
+    public int compareTo(Reserva o) {
+        return this.dia.compareTo(o.getDia());
+    }
 }

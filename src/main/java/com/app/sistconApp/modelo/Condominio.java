@@ -112,6 +112,18 @@ public class Condominio implements Serializable, Comparable<Condominio> {
     private List<Pessoa> pessoas = new ArrayList<>();
 
     @OneToMany(mappedBy = "condominio", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @OrderBy(value = "nome")
+    private List<Morador> moradores = new ArrayList<>();
+
+    public List<Morador> getMoradores() {
+        return moradores;
+    }
+
+    public void setMoradores(List<Morador> moradores) {
+        this.moradores = moradores;
+    }
+
+    @OneToMany(mappedBy = "condominio", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, orphanRemoval = true)
     @OrderBy(value = "sigla")
     private List<Conta> contas = new ArrayList<>();
 
