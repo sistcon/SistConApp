@@ -20,12 +20,12 @@
 				<div class="card">
 					<ul class="list-group list-group-flush">
 						<li class="list-group-item">
-							<p class="text-primary">
+							<p class="text-success">
 								<!--<i class="far fa-calendar-alt"></i> Calendário-->
 							</p>
-							<div class="form-row">
-								<div class="form-group col-md-4" th:classappend="${reserva.idReserva == null}?'col-md-3':'col-md-4'">
-									<label><i class="far fa-calendar-alt bg-light"></i> Data da Reserva</label> <input autofocus class="form-control" type="date" th:errorclass="is-invalid" th:field="*{dia}" placeholder="Dia da reserva" />
+							<div class="form-row ">
+								<div class="form-group col-md-4 text-success" th:classappend="${reserva.idReserva == null}?'col-md-3':'col-md-4'">
+									<label ><i class="far fa-calendar-alt bg-light text-success"></i> Data da Reserva</label> <input autofocus class="form-control" type="date" th:errorclass="is-invalid" th:field="*{dia}" placeholder="Dia da reserva" />
 									<div class="invalid-feedback" th:errors="*{dia}"></div>
 								</div>
                                                         

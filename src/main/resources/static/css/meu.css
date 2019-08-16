@@ -6,16 +6,19 @@
 
 /* Cabeçalho fixo */
 body {
-	padding-top: 57px; /* Tamanho do menu superior */
+	padding-top: 54px; /* Tamanho do menu superior */
+        
 }
 
 /* Rodapé fixo */
 html {
 	position: relative;
 	min-height: 100%;
+        
 }
 body {
 	padding-bottom: 56px; /* Tamanho do rodapé */
+        background-color: #e1e2e3;
 }
 .footer {
 	position: absolute;
@@ -27,8 +30,11 @@ body {
 
 /* Margens padrão */
 main {
-	margin-top: 16px;
-	margin-bottom: 16px;
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
+input:focus { 
+  background-color: yellow;
 }
 
 /* Formulários 
@@ -172,8 +178,8 @@ fieldset:disabled input::placeholder, fieldset:disabled textarea::placeholder{
 }
 /*Sidebar comprimido pequeno*/
 #sidebar.active {
-	min-width: 200px; /*mudar o tamanho do bloco do menu(deixa mais largo) antes 80*/
-	max-width: 200px;
+	min-width: 220px; /*mudar o tamanho do bloco do menu(deixa mais largo) antes 80*/
+	max-width: 220px;
 	text-align: center;
 }
 #sidebar.active ul li a {
