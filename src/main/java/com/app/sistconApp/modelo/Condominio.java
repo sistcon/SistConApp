@@ -353,5 +353,8 @@ public class Condominio implements Serializable, Comparable<Condominio> {
     public List<Reserva> getReserva() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    public List<Evento> getEvento() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
 }
