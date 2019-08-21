@@ -32,12 +32,17 @@ Cadastro de eventos dentro do condomínio
                                         <div class="invalid-feedback" th:errors="*{dataEvento}"></div>
                                     </div>
                                     <div class="form-group">
-                                        <label>Titulo</label> <input class="form-control" type="text" th:errorclass="is-invalid" th:field="*{titulo}" placeholder="Titulo" />
+                                        <label>Unidade</label> <input class="form-control" type="text" th:errorclass="is-invalid" th:field="*{titulo}" placeholder="Titulo" />
                                         <div class="invalid-feedback" th:errors="*{titulo}"></div>
                                     </div>
                                     <div class="form-group">
                                         <label>Descrição</label> <input class="form-control" type="text" th:errorclass="is-invalid" th:field="*{descricao}" placeholder="Descrição" />
                                         <div class="invalid-feedback" th:errors="*{descricao}"></div>
+                                    </div>
+                                    
+                                    <div class="form-group col-md-2">
+                                        <label>Numero</label> <input autofocus class="form-control" type="text"  th:errorclass="is-invalid" th:field="*{sigla}" placeholder="Uma abrevitura" />
+                                        <div class="invalid-feedback" th:errors="*{sigla}"></div>
                                     </div>
 
                                     <div class="form-group col-md-6">

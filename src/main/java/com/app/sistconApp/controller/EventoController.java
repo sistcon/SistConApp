@@ -5,8 +5,10 @@
  */
 package com.app.sistconApp.controller;
 
+import com.app.sistconApp.modelo.Bloco;
 import com.app.sistconApp.modelo.Evento;
 import com.app.sistconApp.modelo.Moradia;
+import com.app.sistconApp.service.BlocoService;
 import com.app.sistconApp.service.EventoService;
 import com.app.sistconApp.service.MoradiaService;
 import java.util.List;
@@ -40,6 +42,8 @@ public class EventoController {
     
     @Autowired
     MoradiaService moradiaService;
+    
+   
 
     @ModelAttribute("ativo")
     public String[] ativo() {
@@ -49,6 +53,8 @@ public class EventoController {
     public List<Moradia> moradias() {
         return moradiaService.listar();
     }
+    
+    
 
     @GetMapping({"", "/", "/lista"})
     public ModelAndView getEventos(@RequestParam("pagina") Optional<Integer> pagina,
