@@ -19,24 +19,24 @@
 		<div class="table-responsive">
 			<table class="table table-hover table-sm crud-list mb-0">
 				<caption class="pb-0">
-					<span th:text="${eventos.totalElements == 0} ? 'Nenhum' : 'Há '+${eventos.totalElements}"></span> <span th:text="${eventos.totalElements>1} ? 'Eventoss cadastrados' : 'evento cadastrado'"></span>.
+					<span th:text="${eventos.totalElements == 0} ? 'Nenhum' : 'Há '+${eventos.totalElements}"></span> <span th:text="${eventos.totalElements>1} ? 'eventos cadastrados' : 'evento cadastrado'"></span>.
 				</caption>
 				<thead class="thead-light">
 					<tr>
                                                 <th scope="col">Data</th>
-						<th scope="col">Unidade</th>
                                                 <th scope="col">Titulo</th>
                                                 <th scope="col">Descrição</th>
+                                                <th scope="col">Unidade</th>
 						<th></th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr th:each="evento : ${eventos.content}">
-                                                <th scope="row" th:text="${#temporals.format(evento.dataEvento,'dd/MM/yyyy')}"></th>
-                                               <th scope="row" th:text="${evento.moradia}"></th>
+                                                <th scope="row" th:text="${#temporals.format(reserva.dia,'dd/MM/yyyy')}"></th>
 						<td th:text="${evento.titulo}"></td>
                                                 <td th:text="${evento.descricao}"></td>
-						<td><a class="btn btn-outline-secondary btn-sm" th:href="@{/sindico/eventos/{idEvento}/cadastro(idEvento=${evento.idEvento},somenteLeitura)}"><i class="fas fa-eye"></i><span> Ver</span></a> <a class="btn btn-outline-primary btn-sm" th:href="@{/sindico/evento/{idEvento}/cadastro(idEvento=${evento.idEvento})}"><i class="fas fa-edit"></i><span> Editar</span></a> <a class="btn btn-outline-danger btn-sm" data-toggle="modal" href="#modalExcluir" th:data-idobj="${evento.idEvento}" th:data-obs="${evento}"><i class="fas fa-trash-alt"></i><span> Excluir</span></a></td>
+                                                <th scope="row" th:text="${evento.moradia}"></th>
+						<<td><a class="btn btn-outline-secondary btn-sm" th:href="@{/sindico/eventos/{idEvento}/cadastro(idEvento=${evento.idEvento},somenteLeitura)}"><i class="fas fa-eye"></i><span> Ver</span></a> <a class="btn btn-outline-primary btn-sm" th:href="@{/sindico/evento/{idEvento}/cadastro(idEvento=${evento.idEvento})}"><i class="fas fa-edit"></i><span> Editar</span></a> <a class="btn btn-outline-danger btn-sm" data-toggle="modal" href="#modalExcluir" th:data-idobj="${evento.idEvento}" th:data-obs="${evento}"><i class="fas fa-trash-alt"></i><span> Excluir</span></a></td>
 					</tr>
 				</tbody>
 			</table>
@@ -52,7 +52,7 @@
 				<li th:if="${atual < (eventos.totalPages - 1)}" class="page-item"><a class="page-link" th:href="@{/sindico/eventos(pagina=${atual +1},tamanho=${eventos.size})}" th:text="${atual +1}"></a></li>
 				<li class="page-item disabled" th:if="${atual < (eventos.totalPages - 2 )}"><a class="page-link" href="#">...</a></li>
 				<li th:if="${eventos.totalPages > 1}" class="page-item" th:classappend="${eventos.isLast()}?'active'"><a class="page-link" th:href="@{/sindico/eventos(pagina=${eventos.totalPages},tamanho=${eventos.size})}" th:text="${eventos.totalPages}"></a></li>
-				<li class="page-item" th:unless="${eventos.isLast()}"><a class="page-link last" th:href="@{/sindico/reservas(pagina=${atual +1},tamanho=${eventos.size})}"><span>Próxima </span><i class="fas fa-angle-double-right"></i></a></li>
+				<li class="page-item" th:unless="${eventos.isLast()}"><a class="page-link last" th:href="@{/sindico/eventos(pagina=${atual +1},tamanho=${eventos.size})}"><span>Próxima </span><i class="fas fa-angle-double-right"></i></a></li>
 				<li class="d-none d-sm-block page-item" th:if="${atual < (eventos.totalPages-9)}"><a class="page-link" th:href="@{/sindico/eventos(pagina=${atual +10},tamanho=${eventos.size})}">+10</a></li>
 			</ul>
 		</nav>

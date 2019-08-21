@@ -30,7 +30,7 @@ import org.hibernate.validator.constraints.br.CPF;
  */
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "morador")
+@Table(name = "moradores")
 public class Morador implements Serializable, Comparable<Morador>{
 
     @Id
@@ -271,7 +271,7 @@ public class Morador implements Serializable, Comparable<Morador>{
 
     @Override
     public int compareTo(Morador o) {
-        return this.toString().compareTo(o.toString());
+        return this.moradia.compareTo(o.getMoradia());
     }
 
 }
