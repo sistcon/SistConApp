@@ -36,7 +36,7 @@
                             <td th:text="${evento.moradia}"></td>
                             <td th:text="${evento.titulo}"></td>
                             <td th:text="${evento.descricao}"></td>
-
+                            
                             <td><a class="btn btn-outline-secondary btn-sm" th:href="@{/sindico/eventos/{idEvento}/cadastro(idEvento=${evento.idEvento},somenteLeitura)}">
                                     <i class="fas fa-eye"></i><span> Ver</span></a> <a class="btn btn-outline-primary btn-sm" th:href="@{/sindico/eventos/{idEvento}/cadastro(idEvento=${evento.idEvento})}">
                                         <i class="fas fa-edit"></i><span> Editar</span></a> <a class="btn btn-outline-danger btn-sm" data-toggle="modal" href="#modalExcluir" th:data-idobj="${evento.idEvento}" th:data-obs="${evento}">
