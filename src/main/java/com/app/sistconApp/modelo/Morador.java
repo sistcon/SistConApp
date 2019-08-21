@@ -6,7 +6,10 @@
 package com.app.sistconApp.modelo;
 
 import com.app.sistconApp.modelo.enums.Estado;
+import com.app.sistconApp.modelo.enums.Genero;
+import com.app.sistconApp.modelo.enums.TipoMorador;
 import java.io.Serializable;
+import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -23,6 +26,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.br.CPF;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
@@ -31,18 +35,28 @@ import org.hibernate.validator.constraints.br.CPF;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "morador")
-public class Morador implements Serializable, Comparable<Morador>{
+public class Morador implements Serializable, Comparable<Morador> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idmorador")
     private Long idMorador;
-    
+
     @NotBlank
     @Size(min = 1, max = 50)
     private String nome;
     @CPF
     private String cpf;
+
+    @Size(max = 14)
+    private String rg;
+
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private LocalDate nascimento;
+
+    @Enumerated(EnumType.STRING)
+    private Genero genero;
+
     @Size(min = 2, max = 5)
     @NotBlank
     private String sigla;
@@ -93,7 +107,45 @@ public class Morador implements Serializable, Comparable<Morador>{
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idmoradia")
     private Moradia moradia;
+
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    private TipoMorador tipo;
+
+    public String getRg() {
+        return rg;
+    }
+
+    public void setRg(String rg) {
+        this.rg = rg;
+    }
+
+    public LocalDate getNascimento() {
+        return nascimento;
+    }
+
+    public void setNascimento(LocalDate nascimento) {
+        this.nascimento = nascimento;
+    }
+
+    public Genero getGenero() {
+        return genero;
+    }
+
+    public void setGenero(Genero genero) {
+        this.genero = genero;
+    }
     
+    
+
+    public TipoMorador getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(TipoMorador tipo) {
+        this.tipo = tipo;
+    }
+
     public Long getIdMorador() {
         return idMorador;
     }
