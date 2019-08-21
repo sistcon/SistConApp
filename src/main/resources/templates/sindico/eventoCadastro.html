@@ -54,7 +54,7 @@ Cadastro de eventos dentro do condomínio
                     </div>
                 </fieldset>
                 <button th:unless="${param.somenteLeitura}" type="submit" class="btn btn-success">Salvar</button>
-                <a class="btn btn-danger" th:href="@{/sindico/eventos}" role="button" th:text="${param.somenteLeitura}?'Voltar':_">Cancelar</a>
+			<a class="btn btn-danger" th:href="@{/sindico/eventos}" role="button" th:text="${param.somenteLeitura}?'Voltar':_">Cancelar</a>
             </form>
         </main>
     </th:block>

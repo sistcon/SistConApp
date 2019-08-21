@@ -7,11 +7,11 @@ package com.app.sistconApp.controller;
 
 import com.app.sistconApp.modelo.Moradia;
 import com.app.sistconApp.modelo.Morador;
-import com.app.sistconApp.modelo.PessoaFisica;
+
 import com.app.sistconApp.modelo.enums.Estado;
 import com.app.sistconApp.modelo.enums.Genero;
 import com.app.sistconApp.modelo.enums.TipoMorador;
-import com.app.sistconApp.modelo.enums.TipoPessoa;
+
 import com.app.sistconApp.modelo.enums.TipoRelacao;
 import com.app.sistconApp.service.MoradiaService;
 import com.app.sistconApp.service.MoradorService;

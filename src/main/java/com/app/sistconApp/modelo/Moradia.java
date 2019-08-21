@@ -67,6 +67,7 @@ public class Moradia implements Serializable, Comparable<Moradia> {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idbloco")
 	private Bloco bloco;
+       
 
 	@OneToMany(mappedBy = "moradia", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	@OrderBy(value = "dataEntrada")
@@ -76,6 +77,20 @@ public class Moradia implements Serializable, Comparable<Moradia> {
 	@OneToMany(mappedBy = "moradia", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, orphanRemoval = true)
 	@OrderBy(value = "numero, parcela")
 	private List<Cobranca> cobrancas = new ArrayList<>();
+        
+        @OneToMany(mappedBy = "moradia", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, orphanRemoval = true)
+        @OrderBy(value = "nome")
+
+        private List<Morador> moradores = new ArrayList<>();
+
+        public List<Morador> getMoradores() {
+        return moradores;
+    }
+
+         public void setMoradores(List<Morador> moradores) {
+            this.moradores = moradores;
+    }
+        
 
 	public Long getIdMoradia() {
 		return idMoradia;
@@ -140,7 +155,8 @@ public class Moradia implements Serializable, Comparable<Moradia> {
 	public void setBloco(Bloco bloco) {
 		this.bloco = bloco;
 	}
-
+        
+       
 	public List<Relacao> getRelacoes() {
 		return relacoes;
 	}
@@ -193,7 +209,7 @@ public class Moradia implements Serializable, Comparable<Moradia> {
 	}
 
 	@Override
-	public int compareTo(Moradia arg0) {
-		return this.toString().compareTo(arg0.toString());
+	public int compareTo(Moradia o) {
+		return this.toString().compareTo(o.getSigla());
 	} 
 }
