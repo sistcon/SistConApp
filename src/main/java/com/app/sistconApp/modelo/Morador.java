@@ -45,7 +45,13 @@ public class Morador implements Serializable, Comparable<Morador> {
     @NotBlank
     @Size(min = 1, max = 50)
     private String nome;
+    
+    @NotBlank
+    @Size(min = 1, max = 50)
+    private String sobrenome;
+    
     @CPF
+    @Size(min = 11, max = 11)
     private String cpf;
 
     @Size(max = 14)
@@ -168,6 +174,14 @@ public class Morador implements Serializable, Comparable<Morador> {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public String getSobrenome() {
+        return sobrenome;
+    }
+
+    public void setSobrenome(String sobrenome) {
+        this.sobrenome = sobrenome;
     }
 
     public String getEmail() {
@@ -322,8 +336,8 @@ public class Morador implements Serializable, Comparable<Morador> {
     }
 
     @Override
-    public int compareTo(Morador o) {
-        return this.toString().compareTo(o.toString());
-    }
+	public int compareTo(Morador o) {
+		return this.sigla.compareTo(o.getSigla());
+	}
 
 }

@@ -9,126 +9,151 @@
 	<th:block th:fragment="conteudo">
 		<main role="main">
 		<h3 class="font-weight-light">Cadastro de Morador</h3>
-                <div th:unless="${haCondominio}" class="alert alert-warning">
-                    <h6>Condomínio não cadastrado</h6>
-			Para cadastrar um morador é preciso completar o cadastro do seu condomínio, <a class="text-warning" th:href="@{/sindico/condominio/cadastro}">clique aqui</a>.
-                        </div>
-		<p th:if="${haCondominio}" th:text="${morador.idMorador == null} ? 'Ao salvar, um novo morador será adicionada no condomínio.' : (${param.somenteLeitura} ? 'As informações não podem ser alteradas neste modo.' :  'Ao salvar, as informações do morador atual serão atualizadas.')"></p>
+		<div th:unless="${haCondominio}" class="alert alert-warning">
+			<h6>Condomínio não cadastrado</h6>
+			Para cadastrar blocos é preciso completar o cadastro do seu condomínio, <a class="text-warning" th:href="@{/sindico/condominio/cadastro}">clique aqui</a>.
+		</div>
+		<p th:if="${haCondominio}" th:text="${morador.idMorador == null} ? 'Ao salvar, um novo morador será criado no condomínio.' : (${param.somenteLeitura} ? 'As informações não podem ser alteradas neste modo.' :  'Ao salvar, as informações do bloco atual serão atualizadas.')"></p>
 		<form th:if="${haCondominio}" th:action="@{/sindico/moradores/cadastro}" th:object="${morador}" th:method="${morador.idMorador == null} ? post : put" novalidate>
 			<fieldset th:disabled="${param.somenteLeitura}" class="mb-3">
 				<input type="hidden" th:field="*{condominio}" /> <input type="hidden" th:field="*{idMorador}" />
 				<div class="card">
 					<ul class="list-group list-group-flush">
 						<li class="list-group-item">
-							<p class="text-primary">
-								<i class="fas fa-home"></i> Informações principais
+							<p class="text-success">
+								<i class="fas fa-building"></i> Informações principais
 							</p>
+                                                        
                                                         <div class="form-row">
-                                    <div class="form-group col-md-6">
-                                        <label>Nome</label> <input class="form-control" type="text" th:errorclass="is-invalid" th:field="*{nome}" placeholder="Nome do condômino" />
-                                        <div class="invalid-feedback" th:errors="*{nome}"></div>
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label>Sobrenome</label> <input class="form-control" type="text" th:errorclass="is-invalid" th:field="*{sobrenome}" placeholder="Sobrenome do condômino" />
-                                        <div class="invalid-feedback" th:errors="*{sobrenome}"></div>
-                                    </div>
+                                                            <div class="form-group col-md-4">
+                                                                <label>Nome</label> <input class="form-control" type="text" th:errorclass="is-invalid" th:field="*{nome}" placeholder="Nome do morador" />
+                                                                <div class="invalid-feedback" th:errors="*{nome}"></div>
+                                                            </div>
+                                                                <div class="form-group col-md-4">
+                                                                <label>Sobrenome</label> <input class="form-control" type="text" th:errorclass="is-invalid" th:field="*{sobrenome}" placeholder="Sobrenome do morador" />
+                                                                        <div class="invalid-feedback" th:errors="*{sobrenome}"></div>
+                                                                </div>
+                                                            <div class="form-group col-md-3">
+									<label>CPF</label> <input class="form-control" type="tel" th:errorclass="is-invalid" th:field="*{cpf}" placeholder="CPF do morador" />
+									<div class="invalid-feedback" th:errors="*{cpf}"></div>
+									<small>Somente números</small>
+								</div>
+                                                            
+                                                            <div class="form-group col-md-3">
+                                                                <label>RG</label> <input class="form-control" type="text" th:errorclass="is-invalid" th:field="*{rg}" placeholder="A Identidade do morador" />
+                                                                <div class="invalid-feedback" th:errors="*{rg}"></div>  
+                                                            </div>
+                                                            
+                                                            <div class="form-group col-md-3">
+                                                                <label>Data de Nascimento</label> <input class="form-control" type="date" th:errorclass="is-invalid" th:field="*{nascimento}" placeholder="A data de nascimento" />
+                                                                <div class="invalid-feedback" th:errors="*{nascimento}"></div>
+                                                            </div>
+                                                            
+                                                            <div class="form-group col-md-3">
+                                                                <label>Gênero</label> <select class="custom-select" id="genero" th:errorclass="is-invalid" th:field="*{genero}">
+                                                                    <option th:unless="${param.somenteLeitura}" value="" hidden="true">Selecione</option>
+                                                                    <option th:each="genero : ${generos}" th:value="${genero}" th:text="${genero.nome}"></option>
+                                                                </select>
+                                                                <div class="invalid-feedback" th:errors="*{genero}"></div>
+                                                            </div>
+                                                            
+                                                        </div>
                                 </div>
-                                <div class="form-row">
-                                    <div class="form-group col-md-3">
-                                        <label>CPF</label> <input class="form-control" type="number" th:errorclass="is-invalid" th:field="*{cpf}" placeholder="O CPF do condômino" />
-                                        <div class="invalid-feedback" th:errors="*{cpf}"></div>
-                                        <small>Somente números</small>
-                                    </div>
-                                    <div class="form-group col-md-3">
-                                        <label>RG</label> <input class="form-control" type="text" th:errorclass="is-invalid" th:field="*{rg}" placeholder="A Identidade do condômino" />
-                                        <div class="invalid-feedback" th:errors="*{rg}"></div>
-                                    </div>
-                                    <div class="form-group col-md-3">
-                                        <label>Data de Nascimento</label> <input class="form-control" type="date" th:errorclass="is-invalid" th:field="*{nascimento}" placeholder="A data de nascimento" />
-                                        <div class="invalid-feedback" th:errors="*{nascimento}"></div>
-                                    </div>
-                                    <div class="form-group col-md-3">
-                                        <label>Gênero</label> <select class="custom-select" id="genero" th:errorclass="is-invalid" th:field="*{genero}">
-                                            <option th:unless="${param.somenteLeitura}" value="" hidden="true">Selecione</option>
-                                            <option th:each="genero : ${generos}" th:value="${genero}" th:text="${genero.nome}"></option>
-                                        </select>
-                                        <div class="invalid-feedback" th:errors="*{genero}"></div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <p class="text-primary">
-                                    <i class="fas fa-envelope"></i> Dados de contato
-                                </p>
-                              <div class="form-group">
-                                    <label>E-mail</label> <input class="form-control" type="email" th:errorclass="is-invalid" th:field="*{email}" placeholder="O e-mail do condômino" />
-                                    <div class="invalid-feedback" th:errors="*{email}"></div>
-                                </div> 
-                                <div class="form-row">
-                                    <div class="form-group col-md-6">
-                                        <label>Telefone</label> <input class="form-control" type="tel" th:errorclass="is-invalid" th:field="*{telefone}" placeholder="Telefone com DDD" />
-                                        <div class="invalid-feedback" th:errors="*{telefone}"></div>
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label>Celular</label> <input class="form-control" type="tel" th:errorclass="is-invalid" th:field="*{celular}" placeholder="Celular com DDD" />
-                                        <div class="invalid-feedback" th:errors="*{celular}"></div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <p class="text-primary">
-                                    <i class="fas fa-map-marker-alt"></i> Residência
-                                </p>
-                                <div class="form-row">
-                                    <div class="form-group col-md-10">
-                                        <label>Endereço</label> <input class="form-control" type="text" th:errorclass="is-invalid" th:field="*{endereco}" placeholder="O endereço residencial do condômino" />
-                                        <div class="invalid-feedback" th:errors="*{endereco}"></div>
-                                    </div>
-                                    <div class="form-group col-md-2">
-                                        <label>Número</label> <input class="form-control" type="number" th:errorclass="is-invalid" th:field="*{numeroEnd}" placeholder="O nº" />
-                                        <div class="invalid-feedback" th:errors="*{numeroEnd}"></div>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col-md-6">
-                                        <label>Complemento</label> <input class="form-control" type="text" th:errorclass="is-invalid" th:field="*{complementoEnd}" placeholder="Complemento do endereço" />
-                                        <div class="invalid-feedback" th:errors="*{complementoEnd}"></div>
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label>Bairro</label> <input class="form-control" type="text" th:errorclass="is-invalid" th:field="*{bairro}" placeholder="Bairro ou distrito" />
-                                        <div class="invalid-feedback" th:errors="*{bairro}"></div>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col-md-4">
-                                        <label>CEP <a class="text-secondary" tabindex="-1" href="http://www.buscacep.correios.com.br/sistemas/buscacep/buscaCep.cfm" title="Não sei o CEP" target="_blank"><i class="fas fa-question-circle"></i></a></label> <input class="form-control" type="number" th:errorclass="is-invalid" th:field="*{cep}" placeholder="O CEP do condômino" />
-                                        <div class="invalid-feedback" th:errors="*{cep}"></div>
-                                        <small>Somente números</small>
-                                    </div>
-                                    <div class="form-group col-md-4">
-                                        <label>Município</label> <input class="form-control" type="text" th:errorclass="is-invalid" th:field="*{cidade}" placeholder="O município do condômino" />
-                                        <div class="invalid-feedback" th:errors="*{cidade}"></div>
-                                    </div>
-                                    <div class="form-group col-md-4">
-                                        <label>Estado</label> <select class="custom-select" id="estado" th:errorclass="is-invalid" th:field="*{estado}">
-                                            <option th:unless="${param.somenteLeitura}" value="" hidden="true">Selecione</option>
-                                            <option th:each="estado : ${estados}" th:value="${estado}" th:text="${estado.nome}"></option>
-                                        </select>
-                                        <div class="invalid-feedback" th:errors="*{estado}"></div>
-                                    </div>
-                                </div>
-
-                            </li>
-                            </ul>
-                                </div>
-                            </fieldset>
+                                                        
+                                    
+                                                            
+                                                        
+                                                       
+                                                   
+							<!--<div class="form-row">
+								<div class="form-group col-md-4">
+									<label>CNPJ</label> <input class="form-control" type="number" th:errorclass="is-invalid" th:field="*{cnpj}" placeholder="O CNPJ do condomínio" />
+									<div class="invalid-feedback" th:errors="*{cnpj}"></div>
+									<small>Somente números</small>
+								</div>
+								<div class="form-group col-md-4">
+									<label>Inscrição Estadual</label> <input class="form-control" type="number" th:errorclass="is-invalid" th:field="*{ie}" placeholder="A IE do condomínio" />
+									<div class="invalid-feedback" th:errors="*{ie}"></div>
+								</div>
+								<div class="form-group col-md-4">
+									<label>Inscrição Municipal</label> <input class="form-control" type="number" th:errorclass="is-invalid" th:field="*{im}" placeholder="A IM do condomínio" />
+									<div class="invalid-feedback" th:errors="*{im}"></div>
+								</div>
+							</div>
+                                                        <!---->
+						
+						<li class="list-group-item">
+							<p class="text-success">
+								<i class="fas fa-envelope"></i> Dados de contato
+							</p>
+							<div class="form-group">
+								<label>E-mail</label> <input class="form-control" type="email" th:errorclass="is-invalid" th:field="*{email}" placeholder="O e-mail do morador" />
+								<div class="invalid-feedback" th:errors="*{email}"></div>
+							</div>
+							<div class="form-row">
+								<div class="form-group col-md-6">
+									<label>Telefone</label> <input class="form-control" type="tel" th:errorclass="is-invalid" th:field="*{telefone}" placeholder="Telefone com DDD" />
+									<div class="invalid-feedback" th:errors="*{telefone}"></div>
+									<small>Somente números</small>
+								</div>
+								<div class="form-group col-md-6">
+									<label>Celular</label> <input class="form-control" type="tel" th:errorclass="is-invalid" th:field="*{celular}" placeholder="Celular com DDD" />
+									<div class="invalid-feedback" th:errors="*{celular}"></div>
+									<small>Somente números</small>
+								</div>
+							</div>
+						</li>
+						<li class="list-group-item">
+							<p class="text-success">
+								<i class="fas fa-map-marker-alt"></i> Localização
+							</p>
+							<div class="form-row">
+								<div class="form-group col-md-10">
+									<label>Endereço</label> <input class="form-control" type="text" th:errorclass="is-invalid" th:field="*{endereco}" placeholder="O endereço do condomínio" />
+									<div class="invalid-feedback" th:errors="*{endereco}"></div>
+								</div>
+								<div class="form-group col-md-2">
+									<label>Número</label> <input class="form-control" type="number" th:errorclass="is-invalid" th:field="*{numeroEnd}" placeholder="O nº" />
+									<div class="invalid-feedback" th:errors="*{numeroEnd}"></div>
+								</div>
+							</div>
+							<div class="form-row">
+								<div class="form-group col-md-6">
+									<label>Complemento</label> <input class="form-control" type="text" th:errorclass="is-invalid" th:field="*{complementoEnd}" placeholder="Complemento do endereço" />
+									<div class="invalid-feedback" th:errors="*{complementoEnd}"></div>
+								</div>
+								<div class="form-group col-md-6">
+									<label>Bairro</label> <input class="form-control" type="text" th:errorclass="is-invalid" th:field="*{bairro}" placeholder="Bairro ou distrito" />
+									<div class="invalid-feedback" th:errors="*{bairro}"></div>
+								</div>
+							</div>
+							<div class="form-row">
+								<div class="form-group col-md-4">
+									<label>CEP <a class="text-success" tabindex="-1" href="http://www.buscacep.correios.com.br/sistemas/buscacep/buscaCep.cfm" title="Não sei o CEP" target="_blank"><i class="fas fa-question-circle"></i></a></label> <input class="form-control" type="number" th:errorclass="is-invalid" th:field="*{cep}" placeholder="O CEP do condominio" />
+									<div class="invalid-feedback" th:errors="*{cep}"></div>
+									<small>Somente números</small>
+								</div>
+								<div class="form-group col-md-4">
+									<label>Município</label> <input class="form-control" type="text" th:errorclass="is-invalid" th:field="*{cidade}" placeholder="O município do condomínio" />
+									<div class="invalid-feedback" th:errors="*{cidade}"></div>
+								</div>
+								<div class="form-group col-md-4">
+									<label>Estado</label> <select class="custom-select" id="estado" th:errorclass="is-invalid" th:field="*{estado}">
+										<option th:unless="${param.somenteLeitura}" value="" hidden="true">Selecione</option>
+										<option th:each="estado : ${estados}" th:value="${estado}" th:text="${estado.nome}"></option>
+									</select>
+									<div class="invalid-feedback" th:errors="*{estado}"></div>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</fieldset>
 			<button th:unless="${param.somenteLeitura}" type="submit" class="btn btn-success">Salvar</button>
-			<a class="btn btn-danger" th:href="@{/sindico/moradores}" role="button" th:text="${param.somenteLeitura}?'Voltar':_">Cancelar</a>
+			<a class="btn btn-danger" th:href="@{/sindico}" role="button" th:text="${param.somenteLeitura}?'Voltar':_">Cancelar</a>
 		</form>
 		</main>
 	</th:block>
-<th:block th:fragment="jsAdicional">
-<script th:src="@{/js/meu.linhas-dinamicas.js}"></script>
-</th:block>
+	<th:block th:fragment="jsAdicional"></th:block>
 </body>
 </html>
