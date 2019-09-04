@@ -21,4 +21,5 @@ public interface PessoaRepository extends PagingAndSortingRepository<Pessoa, Lon
 
     // LATER ordenação do sobrenome?
     Page<Pessoa> findAllByCondominioOrderByNome(Condominio condominio, Pageable pagina);
+    
 }
