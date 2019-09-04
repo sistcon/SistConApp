@@ -6,6 +6,7 @@
 package com.app.sistconApp.modelo;
 
 import com.app.sistconApp.modelo.enums.Estado;
+import com.app.sistconApp.modelo.enums.TipoPessoa;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +29,7 @@ import javax.persistence.Table;
 import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
@@ -80,6 +82,10 @@ public class Pessoa implements Serializable, Comparable<Pessoa>{
 
 	@Size(max = 8)
 	private String cep;
+        
+        @NotNull
+        @Enumerated(EnumType.STRING)
+        private TipoPessoa tipo;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idcondominio")
@@ -193,6 +199,17 @@ public class Pessoa implements Serializable, Comparable<Pessoa>{
 	public void setCondominio(Condominio condominio) {
 		this.condominio = condominio;
 	}
+
+    public TipoPessoa getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(TipoPessoa tipo) {
+        this.tipo = tipo;
+    }
+        
+        
+        
 
 	public List<Relacao> getRelacoes() {
 		return relacoes;
