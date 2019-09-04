@@ -97,7 +97,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     public void salvarCondomino(Usuario usuario) {
-        usuario.getAutorizacoes().add(Autorizacao.CONDOMINO);
+        usuario.getAutorizacoes().add(Autorizacao.MORADOR);
         salvar(usuario);
     }
 

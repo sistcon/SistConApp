@@ -12,7 +12,9 @@ package com.app.sistconApp.modelo.enums;
 public enum TipoReserva {
     CH("Churrasqueira"),
 	QU("Quadra"),
-	SA("Salao");
+	SA("Salao"),
+        SC("Salão e Churrasqueira");
+        
         
         private final String nome;
 

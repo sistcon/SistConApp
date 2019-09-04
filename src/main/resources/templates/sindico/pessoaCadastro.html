@@ -41,7 +41,7 @@
                                 </p>
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
-                                        <label>Nome</label> <input class="form-control" type="text" th:errorclass="is-invalid" th:field="*{nome}" placeholder="Nome do condômino" />
+                                        <label>Nome</label> <input class="form-control" type="text" th:errorclass="is-invalid" th:field="*{nome}" placeholder="Nome do morador" />
                                         <div class="invalid-feedback" th:errors="*{nome}"></div>
                                     </div>
                                     <div class="form-group col-md-6">
@@ -71,7 +71,7 @@
                                         <div class="invalid-feedback" th:errors="*{genero}"></div>
                                     </div>
                                 </div>
-                            </li>
+                            </li>  
                             <li class="list-group-item collapse" id="PF" th:unless="${#ctx.tipo == T(com.app.sistconApp.modelo.enums.TipoPessoa).F}">
                                 <p class="text-primary">
                                     <i class="fas fa-user"></i> Informações principais
@@ -103,7 +103,7 @@
                                     </div>
                                 </div>
                             </li>
-                            <li class="list-group-item collapse show" id="PJ" th:if="${#ctx.tipo == T(app.condominio.domain.enums.TipoPessoa).J}">
+                            <li class="list-group-item collapse show" id="PJ" th:if="${#ctx.tipo == T(com.app.sistconApp.modelo.enums.TipoPessoa).J}">
                                 <p class="text-primary">
                                     <i class="fas fa-user-tie"></i> Informações principais
                                 </p>
@@ -142,45 +142,45 @@
                                         <div class="invalid-feedback" th:errors="*{im}"></div>
                                     </div>
                                 </div>
-                            </li>
-                            <li class="list-group-item collapse" id="PJ" th:unless="${#ctx.tipo == Tcom.app.sistconApp.modelo.enums.TipoPessoa).J}">
-                                <p class="text-primary">
-                                    <i class="fas fa-user-tie"></i> Informações principais
-                                </p>
-                                <div class="form-row">
-                                    <div class="form-group col-md-6">
-                                        <label>Nome Fantasia</label> <input disabled class="form-control" type="text" th:errorclass="is-invalid" th:field="*{nome}" placeholder="Nome da empresa" />
-                                        <div class="invalid-feedback" th:errors="*{nome}"></div>
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label>Razão Social</label> <input disabled class="form-control" type="text" name="razaoSocial" id="razaoSocial" placeholder="A razão social da empresa" />
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col-md-6">
-                                        <label>Nome do Representante</label> <input disabled class="form-control" type="text" name="nomeRepresentante" id="nomeRepresentante" placeholder="Nome do responsável pela empresa" />
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label>Sobrenome do Representante</label> <input disabled class="form-control" type="text" name="sobrenomeRepresentante" id="sobrenomeRepresentante" placeholder="Sobrenome do responsável pela empresa" />
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col-md-4">
-                                        <label>CNPJ</label> <input disabled class="form-control" type="number" name="cnpj" id="cnpj" placeholder="O CNPJ da empresa" /> <small>Somente números</small>
-                                    </div>
-                                    <div class="form-group col-md-4">
-                                        <label>Inscrição Estadual</label> <input disabled class="form-control" type="number" name="ie" id="ie" placeholder="A IE da empresa" />
-                                    </div>
-                                    <div class="form-group col-md-4">
-                                        <label>Inscrição Municipal</label> <input disabled class="form-control" type="number" name="im" id="im" placeholder="A IM da empresa" />
-                                    </div>
-                                </div>
-                            </li>
+                            </li>  
+                            <li class="list-group-item collapse" id="PJ" th:unless="${#ctx.tipo == T(com.app.sistconApp.modelo.enums.TipoPessoa).J}">
+							<p class="text-primary">
+								<i class="fas fa-user-tie"></i> Informações principais
+							</p>
+							<div class="form-row">
+								<div class="form-group col-md-6">
+									<label>Nome Fantasia</label> <input disabled class="form-control" type="text" th:errorclass="is-invalid" th:field="*{nome}" placeholder="Nome da empresa" />
+									<div class="invalid-feedback" th:errors="*{nome}"></div>
+								</div>
+								<div class="form-group col-md-6">
+									<label>Razão Social</label> <input disabled class="form-control" type="text" name="razaoSocial" id="razaoSocial" placeholder="A razão social da empresa" />
+								</div>
+							</div>
+							<div class="form-row">
+								<div class="form-group col-md-6">
+									<label>Nome do Representante</label> <input disabled class="form-control" type="text" name="nomeRepresentante" id="nomeRepresentante" placeholder="Nome do responsável pela empresa" />
+								</div>
+								<div class="form-group col-md-6">
+									<label>Sobrenome do Representante</label> <input disabled class="form-control" type="text" name="sobrenomeRepresentante" id="sobrenomeRepresentante" placeholder="Sobrenome do responsável pela empresa" />
+								</div>
+							</div>
+							<div class="form-row">
+								<div class="form-group col-md-4">
+									<label>CNPJ</label> <input disabled class="form-control" type="number" name="cnpj" id="cnpj" placeholder="O CNPJ da empresa" /> <small>Somente números</small>
+								</div>
+								<div class="form-group col-md-4">
+									<label>Inscrição Estadual</label> <input disabled class="form-control" type="number" name="ie" id="ie" placeholder="A IE da empresa" />
+								</div>
+								<div class="form-group col-md-4">
+									<label>Inscrição Municipal</label> <input disabled class="form-control" type="number" name="im" id="im" placeholder="A IM da empresa" />
+								</div>
+							</div>
+						</li>
                             <li class="list-group-item">
                                 <p class="text-primary">
                                     <i class="fas fa-envelope"></i> Dados de contato
                                 </p>
-                              <div class="form-group">
+                                <div class="form-group">
                                     <label>E-mail</label> <input class="form-control" type="email" th:errorclass="is-invalid" th:field="*{email}" placeholder="O e-mail do condômino" />
                                     <div class="invalid-feedback" th:errors="*{email}"></div>
                                 </div> 
@@ -254,7 +254,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                           
+
                                             <tr class="d-none collapse">
                                                 <td><input disabled type="hidden" name="relacoes[].pessoa" th:value="*{idPessoa}" />
                                                     <div class="input-group">
