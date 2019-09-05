@@ -79,7 +79,7 @@
 								<table class="table table-sm mb-0 table-borderless">
 									<thead>
 										<tr>
-											<th style="min-width: 160px" class="pl-0" scope="col">Condômino</th>
+											<th style="min-width: 160px" class="pl-0" scope="col">Morador</th>
 											<th style="min-width: 240px" scope="col">Tipo e Participação</th>
 											<th scope="col">Data Inicial</th>
 											<th scope="col">Data Final</th>
@@ -97,7 +97,7 @@
 													</div>
 													<select disabled class="custom-select last" name="relacoes[].pessoa">
 														<option th:unless="${param.somenteLeitura}" value="" hidden="true">Selecione</option>
-														<option th:if="${#lists.isEmpty(pessoas)}" value="" disabled>Não há condôminos cadastrados</option>
+														<option th:if="${#lists.isEmpty(pessoas)}" value="" disabled>Não há moradores cadastrados</option>
 														<option th:each="p : ${pessoas}" th:value="${p.idPessoa}" th:text="${p}"></option>
 													</select>
 												</div></td>
@@ -125,7 +125,7 @@
 													</div>
 													<select class="custom-select last" th:errorclass="is-invalid" th:field="*{relacoes[__${stat.index}__].pessoa}">
 														<option th:unless="${param.somenteLeitura}" value="" hidden="true">Selecione</option>
-														<option th:if="${#lists.isEmpty(pessoas)}" value="" disabled>Não há condôminos cadastrados</option>
+														<option th:if="${#lists.isEmpty(pessoas)}" value="" disabled>Não há moradores cadastrados</option>
 														<option th:each="p : ${pessoas}" th:value="${p.idPessoa}" th:text="${p}"></option>
 													</select>
 													<div class="invalid-feedback" th:errors="*{relacoes[__${stat.index}__].pessoa}"></div>
