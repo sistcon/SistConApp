@@ -103,7 +103,7 @@
                                     </div>
                                 </div>
                             </li>
-                            <li class="list-group-item collapse show" id="PJ" th:if="${#ctx.tipo == T(app.condominio.domain.enums.TipoPessoa).J}">
+                            <li class="list-group-item collapse show" id="PJ" th:if="${#ctx.tipo == T(com.app.sistconApp.modelo.enums.TipoPessoa).J}">
                                 <p class="text-primary">
                                     <i class="fas fa-user-tie"></i> Informações principais
                                 </p>
@@ -143,7 +143,7 @@
                                     </div>
                                 </div>
                             </li>
-                            <li class="list-group-item collapse" id="PJ" th:unless="${#ctx.tipo == Tcom.app.sistconApp.modelo.enums.TipoPessoa).J}">
+                            <li class="list-group-item collapse" id="PJ" th:unless="${#ctx.tipo == T(com.app.sistconApp.modelo.enums.TipoPessoa).J}">
                                 <p class="text-primary">
                                     <i class="fas fa-user-tie"></i> Informações principais
                                 </p>
@@ -180,7 +180,7 @@
                                 <p class="text-primary">
                                     <i class="fas fa-envelope"></i> Dados de contato
                                 </p>
-                              <div class="form-group">
+                                <div class="form-group">
                                     <label>E-mail</label> <input class="form-control" type="email" th:errorclass="is-invalid" th:field="*{email}" placeholder="O e-mail do condômino" />
                                     <div class="invalid-feedback" th:errors="*{email}"></div>
                                 </div> 
@@ -254,7 +254,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                           
+
                                             <tr class="d-none collapse">
                                                 <td><input disabled type="hidden" name="relacoes[].pessoa" th:value="*{idPessoa}" />
                                                     <div class="input-group">
