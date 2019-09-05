@@ -17,7 +17,8 @@
             <p th:if="${haCondominio}" th:text="${pessoa.idPessoa == null} ? 'Ao salvar, um novo condômino será criado no condomínio.' : (${param.somenteLeitura} ? 'As informações não podem ser alteradas neste modo.' :  'Ao salvar, as informações do morador atual serão atualizadas.')"></p>
             <form th:class="${#ctx.tipo == ''}?'needs-validation'" novalidate th:action="@{/sindico/condominos/cadastro(${'P' + #ctx.tipo})}" th:if="${haCondominio}" th:object="${pessoa}" th:method="${pessoa.idPessoa == null} ? post : put">
                 <fieldset th:disabled="${param.somenteLeitura}" class="mb-3">
-                    <input type="hidden" th:field="*{condominio}" /> <input type="hidden" th:field="*{idPessoa}" />
+                    <input type="hidden" th:field="*{condominio}" />
+                    <input type="hidden" th:field="*{idPessoa}" />
                     <div class="card">
                         <ul class="list-group list-group-flush" id="accordion">
                             <li class="list-group-item">
