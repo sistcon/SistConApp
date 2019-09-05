@@ -34,7 +34,7 @@ import org.springframework.format.annotation.DateTimeFormat;
  */
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "morador")
+@Table(name = "moradores")
 public class Morador implements Serializable, Comparable<Morador> {
 
     @Id
