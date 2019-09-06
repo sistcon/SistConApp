@@ -71,7 +71,7 @@
 								</div>
 							</div>
 						</li>
-						<li class="list-group-item collapse show" id="BC" th:if="${#ctx.tipo == T(app.condominio.domain.enums.TipoConta).BC}">
+						<li class="list-group-item collapse show" id="BC" th:if="${#ctx.tipo == T(com.app.sistconApp.modelo.enums.TipoConta).BC}">
 							<p class="text-success">
 								<i class="fas fa-university"></i> Dados da conta bancária
 							</p>
@@ -105,7 +105,7 @@
 								</div>
 							</div>
 						</li>
-						<li class="list-group-item collapse" id="BC" th:unless="${#ctx.tipo == T(app.condominio.domain.enums.TipoConta).BC}">
+						<li class="list-group-item collapse" id="BC" th:unless="${#ctx.tipo == T(com.app.sistconApp.modelo.enums.TipoConta).BC}">
 							<p class="text-primary">
 								<i class="fas fa-university"></i> Dados da conta bancária
 							</p>

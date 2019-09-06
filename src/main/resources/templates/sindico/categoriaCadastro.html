@@ -15,9 +15,9 @@
 			Para cadastrar categorias é preciso completar o cadastro do seu condomínio, <a class="text-warning" th:href="@{/sindico/condominio/cadastro}">clique aqui</a>.
 		</div>
 		<p th:if="${haCondominio}" th:text="${categoria.idCategoria == null} ? 'Ao salvar, uma nova categoria será criada no condomínio.' : (${param.somenteLeitura} ? 'As informações não podem ser alteradas neste modo.' :  'Ao salvar, as informações da categoria atual serão atualizadas.')"></p>
-		<form th:class="${#ctx.classe == ''}?'needs-validation'" novalidate th:action="@{/sindico/{sub}categorias/cadastro/(sub=(${#ctx.classe == T(app.condominio.domain.enums.TipoClasseCategoria).S} ? 'sub' : ''))}" th:if="${haCondominio}" th:object="${categoria}" th:method="${categoria.idCategoria == null} ? post : put">
+		<form th:class="${#ctx.classe == ''}?'needs-validation'" novalidate th:action="@{/sindico/{sub}categorias/cadastro/(sub=(${#ctx.classe == T(com.app.sistconApp.modelo.enums.TipoClasseCategoria).S} ? 'sub' : ''))}" th:if="${haCondominio}" th:object="${categoria}" th:method="${categoria.idCategoria == null} ? post : put">
 			<fieldset th:disabled="${param.somenteLeitura}" class="mb-3">
-				<input th:if="${#ctx.classe == T(app.condominio.domain.enums.TipoClasseCategoria).C}" type="hidden" th:field="*{condominio}" /> <input type="hidden" th:field="*{idCategoria}" />
+				<input th:if="${#ctx.classe == T(com.app.sistconApp.modelo.enums.TipoClasseCategoria).C}" type="hidden" th:field="*{condominio}" /> <input type="hidden" th:field="*{idCategoria}" />
 				<div class="card">
 					<ul class="list-group list-group-flush" id="accordion">
 						<li class="list-group-item">
@@ -28,7 +28,7 @@
 								<div class="form-group col-md-6">
 									<label>Classe <a class="text-secondary" tabindex="-1" data-toggle="modal" href="#modalInfo" title="O que é isso?"><i class="fas fa-question-circle"></i></a></label> <select required class="custom-select" name="form-accordion-select" data-form="main form" data-parent="#accordion .collapse" autofocus th:disabled="${categoria.idCategoria != null}">
 										<option th:unless="${param.somenteLeitura}" value="" hidden="true">Selecione</option>
-										<option th:each="t : ${tiposClasseCategoria}" th:value="${t}" th:text="${t.nome}" th:selected="${t == #ctx.classe}" data-toggle="collapse" th:data-target="'#'+ ${t}" th:data-form-action="@{/sindico/{sub}categorias/cadastro/(sub=(${t == T(app.condominio.domain.enums.TipoClasseCategoria).S} ? 'sub' : ''))}"></option>
+										<option th:each="t : ${tiposClasseCategoria}" th:value="${t}" th:text="${t.nome}" th:selected="${t == #ctx.classe}" data-toggle="collapse" th:data-target="'#'+ ${t}" th:data-form-action="@{/sindico/{sub}categorias/cadastro/(sub=(${t == T(com.app.sistconApp.modelo.enums.TipoClasseCategoria).S} ? 'sub' : ''))}"></option>
 									</select>
 									<div class="invalid-feedback">Campo obrigatório.</div>
 									<small th:text="${categoria.idCategoria != null} ? 'Este campo não pode ser modificado.' : _">Após salvar, este campo não poderá ser modificado.</small>
@@ -47,7 +47,7 @@
 								<div class="invalid-feedback" th:errors="*{descricao}"></div>
 							</div>
 						</li>
-						<li class="list-group-item collapse show" id="C" th:if="${#ctx.classe == T(app.condominio.domain.enums.TipoClasseCategoria).C}">
+						<li class="list-group-item collapse show" id="C" th:if="${#ctx.classe == T(com.app.sistconApp.modelo.enums.TipoClasseCategoria).C}">
 							<p class="text-primary">
 								<i class="fas fa-tasks"></i> Dados da categoria sintética
 							</p>
@@ -67,7 +67,7 @@
 								</div>
 							</div>
 						</li>
-						<li class="list-group-item collapse" id="C" th:unless="${#ctx.classe == T(app.condominio.domain.enums.TipoClasseCategoria).C}">
+						<li class="list-group-item collapse" id="C" th:unless="${#ctx.classe == T(com.app.sistconApp.modelo.enums.TipoClasseCategoria).C}">
 							<p class="text-primary">
 								<i class="fas fa-tasks"></i> Dados da categoria sintética
 							</p>
