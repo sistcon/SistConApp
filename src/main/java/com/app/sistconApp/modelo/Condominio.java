@@ -117,6 +117,7 @@ public class Condominio implements Serializable, Comparable<Condominio> {
     public void setMoradores(List<Morador> moradores) {
         this.moradores = moradores;
     }
+    
 
     @OneToMany(mappedBy = "condominio", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, orphanRemoval = true)
     @OrderBy(value = "sigla")
@@ -353,6 +354,18 @@ public class Condominio implements Serializable, Comparable<Condominio> {
     }
 
     public List<Ocorrencia> getOcorrencia() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public List<Veiculo> getVeiculo() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public List<Visitante> getConvidado() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public List<Informativo> getInformativo() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

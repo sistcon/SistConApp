@@ -6,7 +6,8 @@
 package com.app.sistconApp.repository;
 
 import com.app.sistconApp.modelo.Condominio;
-import com.app.sistconApp.modelo.Evento;
+
+import com.app.sistconApp.modelo.Veiculo;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;
@@ -14,14 +15,17 @@ import org.springframework.stereotype.Repository;
 
 /**
  *
- * @author Marcelo Fernandes
+ * @author Jadna Cavalcante
  */
 @Repository
-public interface EventoRepository extends PagingAndSortingRepository<Evento, Long> {
-   
+public interface VeiculoRepository extends PagingAndSortingRepository<Veiculo, Long>{
+    
     Boolean existsBySiglaAndCondominio(String sigla, Condominio condominio);
 
-    Boolean existsBySiglaAndCondominioAndIdEventoNot(String sigla, Condominio condominio, Long idEvento);
+    Boolean existsBySiglaAndCondominioAndIdVeiculoNot(String sigla, Condominio condominio, Long idVeiculo);
 
-    Page<Evento> findAllByCondominioOrderBySiglaAsc(Condominio condominio, Pageable pagina);
+    Page<Veiculo> findAllByCondominioOrderBySiglaAsc(Condominio condominio, Pageable pagina);
+    
+    
 }
+

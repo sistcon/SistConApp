@@ -1,8 +1,12 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.app.sistconApp.service;
 
 import com.app.sistconApp.modelo.Condominio;
-import com.app.sistconApp.modelo.Ocorrencia;
-import com.app.sistconApp.repository.OcorrenciaRepository;
+import com.app.sistconApp.modelo.Visitante;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,81 +16,83 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
+import com.app.sistconApp.repository.VisitanteRepository;
 
 /**
  *
- * @author Marcelo Fernandes
+ * @author Jadna Cavalcante
  */
 @Service
 @Transactional
-public class OcorrenciaServiceImpl implements OcorrenciaService {
-    @Autowired
-	private OcorrenciaRepository oc;
-
-	@Autowired
+public class VisitanteServiceImpl implements VisitanteService {
+    
+        @Autowired
+	private VisitanteRepository vs;
+        
+        @Autowired
 	private UsuarioService usuarioService;
         
         @Override
-	public void salvar(Ocorrencia entidade) {
-		if (entidade.getIdOcorrencia() == null) {
+	public void salvar(Visitante entidade) {
+		if (entidade.getIdVisitante() == null) {
 			padronizar(entidade);
-			oc.save(entidade);
+			vs.save(entidade);
 		}
 	}
 
 	@Override
 	@Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
-	public Ocorrencia ler(Long id) {
-		return oc.findById(id).get();
+	public Visitante ler(Long id) {
+		return vs.findById(id).get();
 	}
 
 	@Override
 	@Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
-	public List<Ocorrencia> listar() {
+	public List<Visitante> listar() {
 		Condominio condominio = usuarioService.lerLogado().getCondominio();
 		if (condominio == null) {
 			return new ArrayList<>();
 		}
-		return condominio.getOcorrencia();
+		return condominio.getConvidado();
 	}
 
 	@Override
-	public Page<Ocorrencia> listarPagina(Pageable pagina) {
+	public Page<Visitante> listarPagina(Pageable pagina) {
 		Condominio condominio = usuarioService.lerLogado().getCondominio();
 		if (condominio == null) {
 			return Page.empty(pagina);
 		}
-		return oc.findAllByCondominioOrderBySiglaAsc(condominio, pagina);
+		return vs.findAllByCondominioOrderBySiglaAsc(condominio, pagina);
 	}
 
 	@Override
-	public void editar(Ocorrencia entidade) {
+	public void editar(Visitante entidade) {
 		padronizar(entidade);
-		oc.save(entidade);
+		vs.save(entidade);
 	}
 
 	@Override
-	public void excluir(Ocorrencia entidade) {
-		oc.delete(entidade);
+	public void excluir(Visitante entidade) {
+		vs.delete(entidade);
 	}
         
         
         
 	@Override
 	@Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
-	public void validar(Ocorrencia entidade, BindingResult validacao) {
+	public void validar(Visitante entidade, BindingResult validacao) {
 		// VALIDAÇÕES NA INCLUSÃO
-		if (entidade.getIdOcorrencia() == null) {
+		if (entidade.getIdVisitante() == null) {
 			// Sigla não pode repetir
-			if (oc.existsBySiglaAndCondominio(entidade.getSigla(), usuarioService.lerLogado().getCondominio())) {
+			if (vs.existsBySiglaAndCondominio(entidade.getSigla(), usuarioService.lerLogado().getCondominio())) {
 				validacao.rejectValue("sigla", "Unique");
 			}
 		}
 		// VALIDAÇÕES NA ALTERAÇÃO
 		else {
 			// Sigla não pode repetir
-			if (oc.existsBySiglaAndCondominioAndIdOcorrenciaNot(entidade.getSigla(),
-					usuarioService.lerLogado().getCondominio(), entidade.getIdOcorrencia())) {
+			if (vs.existsBySiglaAndCondominioAndIdVisitanteNot(entidade.getSigla(),
+					usuarioService.lerLogado().getCondominio(), entidade.getIdVisitante())) {
 				validacao.rejectValue("sigla", "Unique");
 			}
 		}
@@ -95,10 +101,12 @@ public class OcorrenciaServiceImpl implements OcorrenciaService {
 
 	@Override
 	@Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
-	public void padronizar(Ocorrencia entidade) {
+	public void padronizar(Visitante entidade) {
 		if (entidade.getCondominio() == null) {
 			entidade.setCondominio(usuarioService.lerLogado().getCondominio());
 		}
 	}
 
 }
+
+

@@ -18,7 +18,7 @@
 						<ul class="navbar-nav ml-auto">
                                                     
                             
-							<li class="nav-item"><a th:classappend="${ativo[0] == 'inicio'}? 'active'" class="nav-link text-white" th:href="@{/}">Início</a></li>
+							<li class="nav-item"><a th:classappend="${ativo[0] == 'inicio'}? 'active'" class="nav-link text-white" th:href="@{/}"></li><i class="fas fa-home"></i> Início</a>
                                                         <li class="nav-item"><a th:classappend="${ativo[0] == 'condominio'}? 'active'" class="nav-link text-white" th:href="@{/sindico}">Condomínio</a></li>
                                                         <li class="nav-item"><a th:classappend="${ativo[0] == 'moradores'}? 'active'" class="nav-link text-white" th:href="@{/moradores}">Morador</a></li>
                                                         <li class="nav-item"><a th:classappend="${ativo[0] == 'administrativo'}? 'active'" class="nav-link text-white" th:href="@{/admin}">Administrativo</a></li>

@@ -5,12 +5,10 @@
  */
 package com.app.sistconApp.modelo;
 
-import com.app.sistconApp.modelo.enums.TipoOcorrencia;
+import com.app.sistconApp.modelo.enums.TipoInformativo;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Objects;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -29,17 +27,20 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
- * @author Marcelo Fernandes
+ * @author Jadna Cavalcante
  */
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "ocorrencias")
-public class Ocorrencia implements Serializable, Comparable<Ocorrencia> {
-
+@Table(name = "informativos")
+public class Informativo implements Serializable, Comparable<Informativo> {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idocorrencia")
-    private Long idOcorrencia;
+    @Column(name = "idinformativo")
+    private Long idInformativo;
+
+    @Size(max = 255)
+    private String assunto;
 
     @NotNull
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
@@ -51,26 +52,26 @@ public class Ocorrencia implements Serializable, Comparable<Ocorrencia> {
 
     @NotNull
     @Enumerated(EnumType.STRING)
-    private TipoOcorrencia tipo;
-
-    @Size(max = 255)
-    private String descricao;
+    private TipoInformativo tipo;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idcondominio")
     private Condominio condominio;
-    
-    @NotNull
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idmoradia")
-    private Moradia moradia;
 
-    public Long getIdOcorrencia() {
-        return idOcorrencia;
+    public Long getIdInformativo() {
+        return idInformativo;
     }
 
-    public void setIdOcorrencia(Long idOcorrencia) {
-        this.idOcorrencia = idOcorrencia;
+    public void setIdInformativo(Long idInformativo) {
+        this.idInformativo = idInformativo;
+    }
+
+    public String getAssunto() {
+        return assunto;
+    }
+
+    public void setAssunto(String assunto) {
+        this.assunto = assunto;
     }
 
     public LocalDate getDia() {
@@ -89,23 +90,14 @@ public class Ocorrencia implements Serializable, Comparable<Ocorrencia> {
         this.sigla = sigla;
     }
 
-    public TipoOcorrencia getTipo() {
+    public TipoInformativo getTipo() {
         return tipo;
     }
 
-    public void setTipo(TipoOcorrencia tipo) {
+    public void setTipo(TipoInformativo tipo) {
         this.tipo = tipo;
     }
 
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
-    
     public Condominio getCondominio() {
         return condominio;
     }
@@ -114,26 +106,10 @@ public class Ocorrencia implements Serializable, Comparable<Ocorrencia> {
         this.condominio = condominio;
     }
 
-    public Moradia getMoradia() {
-        return moradia;
-    }
-
-    public void setMoradia(Moradia moradia) {
-        this.moradia = moradia;
-    }
-    
-    
-    
- @Override
-    public String toString() {
-        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        return dia.format(formato);
-    }
-
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 83 * hash + Objects.hashCode(this.idOcorrencia);
+        int hash = 3;
+        hash = 31 * hash + Objects.hashCode(this.idInformativo);
         return hash;
     }
 
@@ -148,18 +124,18 @@ public class Ocorrencia implements Serializable, Comparable<Ocorrencia> {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Ocorrencia other = (Ocorrencia) obj;
-        if (!Objects.equals(this.idOcorrencia, other.idOcorrencia)) {
+        final Informativo other = (Informativo) obj;
+        if (!Objects.equals(this.idInformativo, other.idInformativo)) {
             return false;
         }
         return true;
     }
-
-    @Override
-    public int compareTo(Ocorrencia o) {
-        return this.dia.compareTo(o.getDia());
-    }
     
+    @Override
+    public int compareTo(Informativo o) {
+        return this.sigla.compareTo(o.getSigla());
+    }
 
- 
+
+    
 }

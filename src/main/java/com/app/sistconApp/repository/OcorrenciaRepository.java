@@ -14,10 +14,11 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface OcorrenciaRepository extends PagingAndSortingRepository<Ocorrencia, Long> {
 
-    Boolean existsBySiglaAndCondominio(String sigla, Condominio condominio);
+        Boolean existsBySiglaAndCondominio(String sigla, Condominio condominio);
 
-    Boolean existsBySiglaAndCondominioAndIdOcorrenciaNot(String sigla, Condominio condominio, Long idOcorrencia);
+	Boolean existsBySiglaAndCondominioAndIdOcorrenciaNot(String sigla, Condominio condominio, Long idOcorrencia);
 
-    Page<Ocorrencia> findAllByCondominioOrderBySiglaAsc(Condominio condominio, Pageable pagina);
+	Page<Ocorrencia> findAllByCondominioOrderBySiglaAsc(Condominio condominio, Pageable pagina);
+    
 
 }

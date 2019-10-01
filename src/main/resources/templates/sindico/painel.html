@@ -19,8 +19,9 @@
 				<div class="card bg-primary"> <!--muda a cor de fundo do card--border-success-->
 					<div class="card-body text-white"><i class="fas fa-edit"style="font-size:26px"></i>
                                                     <h5 class="card-title text-truncate">Eventos</h5>
-							<a class="float-right"><i class="fas fa-arrow-circle-right"></i></a>
-						
+                                                    <p class="card-text text-truncate">
+                                                        <a class="float-right" th:href="@{/sindico/eventos}" title="Cadastro de Eventos"><i class="fas fa-arrow-circle-right text-white"></i></a>
+                                                    </p>
 					</div>
 				</div>
 			</div>
@@ -48,21 +49,7 @@
 					<div class="card-body text-white"><i class="fa fa-bullhorn" style="font-size:26px"></i>
 						<h5 class="card-title text-truncate">Ocorrências</h5>
 						<p class="card-text text-truncate">
-							<a class="float-right"><i class="fas fa-arrow-circle-right"></i></a>
-						</p>
-					</div>
-				</div>
-			</div>
-                          </div>
-                    
-                    <div class="col-md-4 col-sm-6 mb-4 order-5 order-sm-4">
-                         <div class="card border-success">
-                             <!--<div class="card-header bg-light">Documentos</div>-->
-				<div class="card bg-success"> <!--muda a cor de fundo do card--border-success-->
-					<div class="card-body text-white"><i class="fas fa-bell" style="font-size:26px"></i>
-						<h5 class="card-title text-truncate">Registro de Avisos</h5>
-						<p class="card-text text-truncate">
-							<a class="float-right"><i class="fas fa-arrow-circle-right"></i></a>
+							<a class="float-right" th:href="@{/sindico/ocorrencias}" title="Cadastro de Ocorrências"><i class="fas fa-arrow-circle-right text-white"></i></a>
 						</p>
 					</div>
 				</div>
@@ -73,10 +60,10 @@
                          <div class="card border-danger">
                              <!--<div class="card-header bg-light">Veículo</div>-->
 				<div class="card bg-danger"> <!--muda a cor de fundo do card--border-success-->
-					<div class="card-body text-white"><i class="far fa-hand-paper" style="font-size:26px"></i>
-						<h5 class="card-title text-truncate">Votação de Assembleia</h5>
+					<div class="card-body text-white"><i class="fa fa-user-plus" style="font-size:26px"></i>
+						<h5 class="card-title text-truncate">Moradores</h5>
 						<p class="card-text text-truncate">
-							<a class="float-right"><i class="fas fa-arrow-circle-right"></i></a>
+							<a class="float-right" th:href="@{/sindico/pessoas}" title="Cadastro de Moradores"><i class="fas fa-arrow-circle-right text-white"></i></a>
 						</p>
 					</div>
 				</div>
@@ -84,50 +71,41 @@
                           </div>
                     
                     <div class="col-md-4 col-sm-6 mb-4 order-5 order-sm-4">
-                         <div class="card border-warning">
+                         <div class="card border-success">
                              <!--<div class="card-header bg-light">Documentos</div>-->
-				<div class="card bg-warning"> <!--muda a cor de fundo do card--border-success-->
-					<div class="card-body text-white"><i class="fas fa-envelope-open" style="font-size:26px"></i>
-						<h5 class="card-title text-truncate">Rsultado da Votação</h5>
+				<div class="card bg-success"> <!--muda a cor de fundo do card--border-success-->
+					<div class="card-body text-white"><i class="fa fa-car" style="font-size:26px"></i>
+						<h5 class="card-title text-truncate">Cadastro de Veículo</h5>
 						<p class="card-text text-truncate">
-							<a class="float-right"><i class="fas fa-arrow-circle-right"></i></a>
+							<a class="float-right" th:href="@{/sindico/veiculos}" title="Cadastro de Veículos"><i class="fas fa-arrow-circle-right text-white"></i></a>
 						</p>
 					</div>
 				</div>
 			</div>
                           </div>
                     
-			<!--<div class="col-md-4 col-sm-6 mb-4 order-6 order-sm-5">
-				<div class="card" th:classappend="${saldoAtual}<0?'border-danger'">
-                                    <div class="card border-warning">
-                                    <div class="card-header bg-light">Saldo em conta</div>
-					<div class="card-body order-1 bg-warning" th:classappend="${saldoAtual}<0?'text-danger':'text-white'"><i class="fas fa-dollar-sign"style="font-size:26px"></i>
-						<h5 class="card-title text-truncate">Saldo</h5>
-						<p class="card-text text-truncate">
-							<span th:text="'R$ ' + ${saldoAtual}"></span> 
-                                                        <a class="float-right" th:classappend="${saldoAtual}<0?'text-danger':'text-white'" th:href="@{/sindico/contas}" title="Cadastro de Contas de Movimentação">
-                                                            <i class="fas fa-arrow-circle-right"></i></a>
-						</p>
-					</div>
-				</div>
+                    <div class="col-md-4 col-sm-6 mb-4 order-5 order-sm-4">
+                        <div class="card" th:classappend="${saldoAtual}<0?'border-danger'">
+                            <div class="card border-warning">
+                                <div class="card bg-warning">
+                                    <div class="card-body text-white"><i class="fas fa-dollar-sign" style="font-size:26px"></i>
+                                        <h5 class="card-title text-truncate">Saldo em Conta</h5>
+                                        <!--<div class="card-body order-1 bg-warning" th:classappend="${saldoAtual}<0?'text-danger':'text-white'"><i class="fas fa-dollar-sign"style="font-size:26px"></i>-->
+
+                                        <p class="card-text text-truncate">
+                                            <span th:text="'R$ ' + ${saldoAtual}"></span> 
+                                            <a class="float-right" th:classappend="${saldoAtual}<0?'text-danger':'text-white'" th:href="@{/sindico/contas}" title="Cadastro de Contas de Movimentação">
+                                                <i class="fas fa-arrow-circle-right"></i></a>
+                                        </p>
+
+                                    </div>
+                                </div>
+
+
                             </div>
-                            
-   
-			</div>-->
-			<!--<div class="col-md-4 col-sm-6 mb-4 order-7 order-sm-6">
-                            <div class="card" th:classappend="${inadimplencia}>0?'border-primary'">
-                            <div class="card border-primary">
-                                    <div class="card-header bg-light">Inadimplência</div>
-				
-					<div class="card-body bg-primary" th:classappend="${inadimplencia}>0?'text-danger':'text-white'"><i class="fa fa-eye"style="font-size:26px"></i>
-						<h5 class="card-title text-truncate">Consulta</h5>
-						<p class="card-text text-truncate">
-							<span th:text="'R$ ' + ${inadimplencia}"></span> <a class="float-right" th:classappend="${inadimplencia}>0?'text-danger':'text-white'" th:href="@{/sindico/relatorios/inadimplencia}" title="Cadastro de Cobranças"><i class="fas fa-arrow-circle-right"></i></a>
-						</p>
-					</div>
-				</div>
-			</div>
-                    </div>-->
+                        </div>
+                    </div>
+                                    
 			<div class="col-md-4 col-sm-6 mb-4 order-4 order-sm-3">
                             <div class="card border-primary">
                                 <!--<div class="card-header bg-light">Informativos</div>-->
@@ -135,30 +113,50 @@
 					<div class="card-body text-white"><i class="fa fa-users"style="font-size:26px"></i>
 						<h5 class="card-title text-truncate">Registro de Visitantes</h5>
 						<p class="card-text text-truncate">
-                                                 <a class="float-right"><i class="fas fa-arrow-circle-right"></i></a>
+                                                 <a class="float-right" th:href="@{/sindico/visitantes}" title="Cadastro de Visitantes"><i class="fas fa-arrow-circle-right text-white"></i></a>
                                                 </p>
 					</div>
 				</div>
              
 			</div>
+                                
                             </div>
-			<div class="col-md-4 col-sm-6 mb-4 order-5 order-sm-4">
-                            <div class="card border-danger">
-                                <!--<div class="card-header bg-light">Boletos</div>-->
-				<div class="card bg-danger"> <!--muda a cor de fundo do card--border-success-->
-					<div class="card-body text-white"><i class="fas fa-pen-alt"style="font-size:26px"></i>
-						<h5 class="card-title text-truncate">Registro de Assembleia</h5>
+                        
+                        <div class="col-md-4 col-sm-6 mb-4 order-5 order-sm-4">
+                            <div class="card" th:classappend="${inadimplencia}>0?'border-primary'">
+                                <div class="card border-danger">
+                                <div class="card bg-danger">
+                                    <div class="card-body text-white"><i class="fab fa-sistrix"style="font-size:26px"></i>
+                                        <h5 class="card-title text-truncate">Consulta Inadimplência</h5>
+                                        <p class="card-text text-truncate">
+                                            <span th:text="'R$ ' + ${inadimplencia}"></span> <a class="float-right text-white" th:classappend="${inadimplencia}>0?'text-danger':'text-white'" th:href="@{/sindico/relatorios/inadimplencia}" title="Cadastro de Cobranças"><i class="fas fa-arrow-circle-right"></i></a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                             </div>
+
+                        
+                        <div class="col-md-4 col-sm-6 mb-4 order-6 order-sm-5">
+                        <div class="card border-primary">
+				<div class="card bg-primary"> <!--muda a cor de fundo do card--border-success-->
+                                    <!--<div class="card-header bg-light">Cadastro de Reservas</div>-->
+					<div class="card-body text-white"><i class="fas fa-info-circle"style="font-size:26px"></i>
+						<h5 class="card-title text-truncate">Informativo</h5>
 						<p class="card-text text-truncate">
-                                                     <a class="float-right text-white" href="#" title="Ver passo a passo"><i class="fas fa-arrow-circle-right"></i></a>
+                                                    <a class="float-right" th:href="@{/sindico/informativos}" title="Cadastro de Informativos"> <span class="badge badge-success badge-pill" th:text="${numero_informativos}">0</span></a>
 						</p>
 					</div>
 				</div>
 			</div>
-                   </div>
+                    
+                    </div>
+                        
                     <!---->
                         
 			<div class="col-md-6 col-sm-6 mb-4 order-7 order-sm-6">
-				<div class="card bg-secondary text-white">
+				<div class="card bg-success text-white">
 					<div class="card-header">Resumo do Mês</div>
 					<div class="card-body bg-white">
 						<canvas id="resumoMensal" style="max-height: 200px"></canvas>
@@ -167,14 +165,15 @@
 			</div>
                             
 			<div class="col-md-6 mb-4 order-4 order-sm-6 ">
-				<div class="card bg-secondary text-white">
+				<div class="card bg-success text-white">
 					<div class="card-header">Orçamento do Período</div>
 					<div class="card-body bg-white">
 						<canvas id="orcadoRealizado" style="max-height: 200px"></canvas>
 					</div>
 				</div>
 			</div>
-		
+                    
+                    
                             
                       </div>      
 		</main>

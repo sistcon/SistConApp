@@ -43,7 +43,7 @@ public class ReservaController {
 	}
         
         @ModelAttribute("tipos")
-    public TipoReserva[] tipos() {
+        public TipoReserva[] tipos() {
         return TipoReserva.values();
     }
 

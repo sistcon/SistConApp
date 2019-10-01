@@ -29,6 +29,7 @@ public class PainelController {
         model.addAttribute("receitaDespesaMes", relatorioService.receitaDespesaMesAtual());
         model.addAttribute("receitaDespesaRealizada", relatorioService.receitaDespesaRealizadaPeriodoAtual());
         model.addAttribute("receitaDespesaOrcada", relatorioService.receitaDespesaOrcadaPeriodoAtual());
+        model.addAttribute("numero_informativos", relatorioService.getNumeroInformativos());
 
         model.addAttribute("conteudo", "painel");
         return new ModelAndView("fragmentos/layoutSindico", model);

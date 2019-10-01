@@ -1,8 +1,13 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.app.sistconApp.service;
 
 import com.app.sistconApp.modelo.Condominio;
-import com.app.sistconApp.modelo.Ocorrencia;
-import com.app.sistconApp.repository.OcorrenciaRepository;
+import com.app.sistconApp.modelo.Informativo;
+import com.app.sistconApp.repository.InformativoRepository;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,78 +20,79 @@ import org.springframework.validation.BindingResult;
 
 /**
  *
- * @author Marcelo Fernandes
+ * @author Jadna Cavalcante
  */
 @Service
 @Transactional
-public class OcorrenciaServiceImpl implements OcorrenciaService {
+public class InformativoServiceImpl implements InformativoService {
+    
     @Autowired
-	private OcorrenciaRepository oc;
+	private InformativoRepository ir;
 
 	@Autowired
 	private UsuarioService usuarioService;
         
         @Override
-	public void salvar(Ocorrencia entidade) {
-		if (entidade.getIdOcorrencia() == null) {
+	public void salvar(Informativo entidade) {
+		if (entidade.getIdInformativo() == null) {
 			padronizar(entidade);
-			oc.save(entidade);
+			ir.save(entidade);
 		}
 	}
 
 	@Override
 	@Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
-	public Ocorrencia ler(Long id) {
-		return oc.findById(id).get();
+	public Informativo ler(Long id) {
+		return ir.findById(id).get();
 	}
 
 	@Override
 	@Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
-	public List<Ocorrencia> listar() {
+	public List<Informativo> listar() {
 		Condominio condominio = usuarioService.lerLogado().getCondominio();
 		if (condominio == null) {
 			return new ArrayList<>();
 		}
-		return condominio.getOcorrencia();
+		return condominio.getInformativo();
 	}
 
 	@Override
-	public Page<Ocorrencia> listarPagina(Pageable pagina) {
+	public Page<Informativo> listarPagina(Pageable pagina) {
 		Condominio condominio = usuarioService.lerLogado().getCondominio();
 		if (condominio == null) {
 			return Page.empty(pagina);
 		}
-		return oc.findAllByCondominioOrderBySiglaAsc(condominio, pagina);
+		return ir.findAllByCondominioOrderBySiglaAsc(condominio, pagina);
 	}
 
 	@Override
-	public void editar(Ocorrencia entidade) {
+	public void editar(Informativo entidade) {
 		padronizar(entidade);
-		oc.save(entidade);
+		ir.save(entidade);
 	}
 
 	@Override
-	public void excluir(Ocorrencia entidade) {
-		oc.delete(entidade);
+	public void excluir(Informativo entidade) {
+		ir.delete(entidade);
 	}
         
         
         
 	@Override
 	@Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
-	public void validar(Ocorrencia entidade, BindingResult validacao) {
+	public void validar(Informativo entidade, BindingResult validacao) {
 		// VALIDAÇÕES NA INCLUSÃO
-		if (entidade.getIdOcorrencia() == null) {
+		if (entidade.getIdInformativo() == null) {
 			// Sigla não pode repetir
-			if (oc.existsBySiglaAndCondominio(entidade.getSigla(), usuarioService.lerLogado().getCondominio())) {
+			if (ir.existsBySiglaAndCondominio(entidade.getSigla(), usuarioService.lerLogado().getCondominio())) {
 				validacao.rejectValue("sigla", "Unique");
 			}
 		}
 		// VALIDAÇÕES NA ALTERAÇÃO
 		else {
 			// Sigla não pode repetir
-			if (oc.existsBySiglaAndCondominioAndIdOcorrenciaNot(entidade.getSigla(),
-					usuarioService.lerLogado().getCondominio(), entidade.getIdOcorrencia())) {
+			if (ir.existsBySiglaAndCondominioAndIdInformativoNot(entidade.getSigla(),
+					usuarioService.lerLogado().getCondominio(), entidade.getIdInformativo())) {
 				validacao.rejectValue("sigla", "Unique");
 			}
 		}
@@ -95,7 +101,7 @@ public class OcorrenciaServiceImpl implements OcorrenciaService {
 
 	@Override
 	@Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
-	public void padronizar(Ocorrencia entidade) {
+	public void padronizar(Informativo entidade) {
 		if (entidade.getCondominio() == null) {
 			entidade.setCondominio(usuarioService.lerLogado().getCondominio());
 		}
