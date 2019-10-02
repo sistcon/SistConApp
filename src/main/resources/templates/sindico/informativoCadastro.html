@@ -1,0 +1,64 @@
+<!doctype html>
+<!--
+Cadastro de informativos dentro do condomínio
+-->
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+    <head>
+
+        <title>Informativos</title>
+
+    </head>
+    <body>
+    <th:block th:fragment="conteudo">
+        <main role="main">
+            <h3 class="font-weight-light">Cadastro de Informativos</h3>
+            <div th:unless="${haCondominio}" class="alert alert-warning">
+                <h6>Condomínio não cadastrado</h6>
+                Para cadastrar um informativo é preciso completar o cadastro do seu condomínio, <a class="text-warning" th:href="@{/sindico/condominio/cadastro}">clique aqui</a>.
+            </div>
+            <p th:if="${haCondominio}" th:text="${informativo.idInformativo == null} ? 'Ao salvar, um novo informativo será adicionado no condomínio.' : (${param.somenteLeitura} ? 'As informações não podem ser alteradas neste modo.' :  'Ao salvar, os informativos atual serão atualizados.')"></p>
+            <form th:if="${haCondominio}" th:action="@{/sindico/informativos/cadastro}" th:object="${informativo}" th:method="${informativo.idInformativo == null} ? post : put" novalidate>
+                <fieldset th:disabled="${param.somenteLeitura}" class="mb-3">
+                    <input type="hidden" th:field="*{condominio}" /> <input type="hidden" th:field="*{idInformativo}" />
+                    <div class="card">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <p class="text-success">
+                                    <i class="fas fa-info-circle"></i> Informações principais
+                                </p>
+                                <div class="form-row ">
+                                    <div class="form-group col-md-12">
+                                        <label>Assunto</label> <input class="form-control" type="text" th:errorclass="is-invalid" th:field="*{assunto}" placeholder="Assunto" />
+                                        <div class="invalid-feedback" th:errors="*{assunto}"></div>
+                                    </div>
+                                    <div class="form-group col-md-3 text-success" th:classappend="${informativo.idInformativo == null}?'col-md-3':'col-md-4'">
+                                        <label ><i class="far fa-calendar-alt bg-light text-success"></i> Data do Informativo</label> <input autofocus class="form-control" type="date" th:errorclass="is-invalid" th:field="*{dia}" placeholder="Dia do Informativo" />
+                                        <div class="invalid-feedback" th:errors="*{dia}"></div>
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label>Sigla</label> <input class="form-control" type="text" th:errorclass="is-invalid" th:field="*{sigla}" placeholder="Sigla" />
+                                        <div class="invalid-feedback" th:errors="*{sigla}"></div>
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label>Tipo</label> <select class="custom-select" id="tipo" th:errorclass="is-invalid" th:field="*{tipo}">
+                                            <option th:unless="${param.somenteLeitura}" value="" hidden="true">Selecione</option>
+                                            <option th:each="tipo : ${tipos}" th:value="${tipo}" th:text="${tipo.nome}"></option>
+                                        </select>
+                                        <div class="invalid-feedback" th:errors="*{tipo}"></div>
+                                    </div>
+
+                                </div>
+
+                            </li>
+                        </ul>
+                    </div>
+                </fieldset>
+                <button th:unless="${param.somenteLeitura}" type="submit" class="btn btn-success">Salvar</button>
+                <a class="btn btn-danger" th:href="@{/sindico/informativos}" role="button" th:text="${param.somenteLeitura}?'Voltar':_">Cancelar</a>
+            </form>
+        </main>
+    </th:block>
+    <th:block th:fragment="jsAdicional"></th:block>
+</body>
+</html>
+

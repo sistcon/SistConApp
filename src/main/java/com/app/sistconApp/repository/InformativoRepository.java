@@ -6,10 +6,10 @@
 package com.app.sistconApp.repository;
 
 import com.app.sistconApp.modelo.Condominio;
-import com.app.sistconApp.modelo.Reserva;
-import java.time.LocalDate;
+import com.app.sistconApp.modelo.Informativo;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
@@ -18,14 +18,14 @@ import org.springframework.stereotype.Repository;
  * @author Jadna Cavalcante
  */
 @Repository
-public interface ReservaRepository extends PagingAndSortingRepository<Reserva, Long> {
+public interface InformativoRepository extends PagingAndSortingRepository<Informativo, Long> {
     
         Boolean existsBySiglaAndCondominio(String sigla, Condominio condominio);
-        
-        
-        //Boolean existsByCondominioAndDiaAndIdReservaNot(Condominio condominio,LocalDate dia, Long idReserva);
-	Boolean existsBySiglaAndCondominioAndIdReservaNot(String sigla, Condominio condominio, Long idReserva);
 
-	Page<Reserva> findAllByCondominioOrderBySiglaAsc(Condominio condominio, Pageable pagina);
-    
+	Boolean existsBySiglaAndCondominioAndIdInformativoNot(String sigla, Condominio condominio, Long idInformativo);
+
+	Page<Informativo> findAllByCondominioOrderBySiglaAsc(Condominio condominio, Pageable pagina);
+        
+        @Query("SELECT COUNT(i) FROM Informativo i")
+        Long numeroInformativos();
 }

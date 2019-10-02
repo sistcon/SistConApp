@@ -13,10 +13,10 @@ public class InicioController {
 
 	@ModelAttribute("ativo")
 	public String[] ativo() {
-		return new String[] { "inicio", "" };
+		return new String[] { "inicio", "" }; 
 	}
 
-	@GetMapping({ "/", "", "/home", "/inicio" })
+	@GetMapping({ "/", "", "/home", "/inicio"})
 	public ModelAndView inicio() {
 		return new ModelAndView("fragmentos/layoutSite", "conteudo", "inicio");
 	}

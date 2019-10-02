@@ -5,40 +5,47 @@ Cadastro de veiculos dentro do condomínio
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
     <head>
 
-        <title>Ocorrências</title>
+        <title>Veículos</title>
 
     </head>
     <body>
     <th:block th:fragment="conteudo">
         <main role="main">
-            <h3 class="font-weight-light">Cadastro de Ocorrências</h3>
+            <h3 class="font-weight-light">Cadastro de Veículos</h3>
             <div th:unless="${haCondominio}" class="alert alert-warning">
                 <h6>Condomínio não cadastrado</h6>
-                Para cadastrar uma ocorrência é preciso completar o cadastro do seu condomínio, <a class="text-warning" th:href="@{/sindico/condominio/cadastro}">clique aqui</a>.
+                Para cadastrar um evento é preciso completar o cadastro do seu condomínio, <a class="text-warning" th:href="@{/sindico/condominio/cadastro}">clique aqui</a>.
             </div>
-            <p th:if="${haCondominio}" th:text="${ocorrencia.idOcorrencia == null} ? 'Ao salvar, uma nova ocorrência será adicionado no condomínio.' : (${param.somenteLeitura} ? 'As informações não podem ser alteradas neste modo.' :  'Ao salvar, as informações da ocorrência atual serão atualizados.')"></p>
-            <form th:if="${haCondominio}" th:action="@{/sindico/ocorrencias/cadastro}" th:object="${ocorrencia}" th:method="${ocorrencia.idOcorrencia == null} ? post : put" novalidate>
+            <p th:if="${haCondominio}" th:text="${veiculo.idVeiculo == null} ? 'Ao salvar, um novo veículo será adicionado no condomínio.' : (${param.somenteLeitura} ? 'As informações não podem ser alteradas neste modo.' :  'Ao salvar, as informações do veiculo atual serão atualizados.')"></p>
+            <form th:if="${haCondominio}" th:action="@{/sindico/veiculos/cadastro}" th:object="${veiculo}" th:method="${veiculo.idVeiculo == null} ? post : put" novalidate>
                 <fieldset th:disabled="${param.somenteLeitura}" class="mb-3">
-                    <input type="hidden" th:field="*{condominio}" /> <input type="hidden" th:field="*{idOcorrencia}" />
+                    <input type="hidden" th:field="*{condominio}" /> <input type="hidden" th:field="*{idVeiculo}" />
                     <div class="card">
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">
                                 <p class="text-success">
-                                    <!--<i class="far fa-calendar-alt"></i> Informações principais-->
+                                    <i class="fas fa-car"></i> Informações principais
                                 </p>
                                 <div class="form-row ">
-                                    <div class="form-group col-md-4 text-success" th:classappend="${ocorrencia.idOcorrencia == null}?'col-md-3':'col-md-4'">
-                                        <label ><i class="far fa-calendar-alt bg-light text-success"></i> Data da Ocorrência</label> <input autofocus class="form-control" type="date" th:errorclass="is-invalid" th:field="*{dia}" placeholder="Dia da ocorrência" />
-                                        <div class="invalid-feedback" th:errors="*{dia}"></div>
+                                    <div class="form-group col-md-6">
+                                        <label>Madelo</label> <input class="form-control" type="text" th:errorclass="is-invalid" th:field="*{modelo}" placeholder="Modelo" />
+                                        <div class="invalid-feedback" th:errors="*{modelo}"></div>
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label>Marca</label> <input class="form-control" type="text" th:errorclass="is-invalid" th:field="*{marca}" placeholder="Marca" />
+                                        <div class="invalid-feedback" th:errors="*{marca}"></div>
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label>Placa</label> <input class="form-control" type="text" th:errorclass="is-invalid" th:field="*{placa}" placeholder="N° da Placa" />
+                                        <div class="invalid-feedback" th:errors="*{placa}"></div>
                                     </div>
                                     <div class="form-group col-md-3">
                                         <label>Sigla</label> <input class="form-control" type="text" th:errorclass="is-invalid" th:field="*{sigla}" placeholder="Sigla" />
                                         <div class="invalid-feedback" th:errors="*{sigla}"></div>
                                     </div>
-                                    
 
                                     <div class="form-group col-md-3">
-                                        <label>Tipo de Ocorrência</label> <select class="custom-select" id="tipo" th:errorclass="is-invalid" th:field="*{tipo}">
+                                        <label>Tipo Veiculo</label> <select class="custom-select" id="tipo" th:errorclass="is-invalid" th:field="*{tipo}">
                                             <option th:unless="${param.somenteLeitura}" value="" hidden="true">Selecione</option>
                                             <option th:each="tipo : ${tipos}" th:value="${tipo}" th:text="${tipo.nome}"></option>
                                         </select>
@@ -53,12 +60,6 @@ Cadastro de veiculos dentro do condomínio
                                         </select>
                                         <div class="invalid-feedback" th:errors="*{moradia}"></div>
                                     </div>
-                                    
-                                    <div class="form-group col-md-12">
-                                        <label>Descrição</label> <input class="form-control" type="text" th:errorclass="is-invalid" th:field="*{descricao}" placeholder="Descrição" />
-                                        <div class="invalid-feedback" th:errors="*{descricao}"></div>
-                                    </div>
-                                    
                                 </div>
 
                             </li>
@@ -66,7 +67,7 @@ Cadastro de veiculos dentro do condomínio
                     </div>
                 </fieldset>
                 <button th:unless="${param.somenteLeitura}" type="submit" class="btn btn-success">Salvar</button>
-                <a class="btn btn-danger" th:href="@{/sindico/ocorrencias}" role="button" th:text="${param.somenteLeitura}?'Voltar':_">Cancelar</a>
+                <a class="btn btn-danger" th:href="@{/sindico/veiculos}" role="button" th:text="${param.somenteLeitura}?'Voltar':_">Cancelar</a>
             </form>
         </main>
     </th:block>

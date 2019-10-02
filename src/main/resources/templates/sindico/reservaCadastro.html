@@ -4,118 +4,82 @@
 
         <title>Reserva</title>
 
-    </head>
-    <body>
-    <th:block th:fragment="conteudo">
-        <main role="main">
-            <h3 class="font-weight-light">Cadastro do Reserva</h3>
-            <div th:unless="${haCondominio}" class="alert alert-warning">
-                <h6>Condomínio não cadastrado</h6>
-                Para cadastrar reservas é preciso completar o cadastro do seu condomínio, <a class="text-warning" th:href="@{/sindico/condominio/cadastro}">clique aqui</a>.
-            </div>
-            <p th:if="${haCondominio}" th:text="${reserva.idReserva == null} ? 'Ao salvar, uma nova reserva será adicionada no condomínio.' : (${param.somenteLeitura} ? 'As informações não podem ser alteradas neste modo.' :  'Ao salvar, as informações do reserva atual serão atualizadas.')"></p>
-            <form th:if="${haCondominio}" th:action="@{/sindico/reservas/cadastro}" th:object="${reserva}" th:method="${reserva.idReserva == null} ? post : put" novalidate>
-                <fieldset th:disabled="${param.somenteLeitura}" class="mb-3">
-                    <input type="hidden" th:field="*{condominio}" /> <input type="hidden" th:field="*{idReserva}" />
-                    <div class="card">
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">
-                                <p class="text-success">
-                                    <i class="fas fa-money-check-alt"></i> Informações principais
-                                </p>
-                                <div class="form-row ">
-                                    <div class="form-group col-md-4 text-success" th:classappend="${reserva.idReserva == null}?'col-md-3':'col-md-4'">
-                                        <label ><i class="far fa-calendar-alt bg-light text-success"></i> Data da Reserva</label> <input autofocus class="form-control" type="date" th:errorclass="is-invalid" th:field="*{dia}" placeholder="Dia da reserva" />
-                                        <div class="invalid-feedback" th:errors="*{dia}"></div>
-                                    </div>
-
-
-                                    <div class="form-group col-md-4">
-                                        <label>Área Comum</label> <select class="custom-select" id="tipo" th:errorclass="is-invalid" th:field="*{tipo}">
-                                            <option th:unless="${param.somenteLeitura}" value="" hidden="true">Selecione</option>
-                                            <option th:each="tipo : ${tipos}" th:value="${tipo}" th:text="${tipo.nome}"></option>
-                                        </select>
-                                        <div class="invalid-feedback" th:errors="*{tipo}"></div>
-                                    </div>
-
-                                    <div class="form-group col-md-4">
-                                        <label>Sigla</label> <input autofocus class="form-control" type="text" th:errorclass="is-invalid" th:field="*{sigla}" placeholder="Sigla" />
-                                        <div class="invalid-feedback" th:errors="*{sigla}"></div>
-                                    </div>
-
-                                    <div class="form-group col-md-4">
-                                        <label>Convidado</label> <input autofocus class="form-control" type="text" th:errorclass="is-invalid" th:field="*{convidado}" placeholder="Convidado" />
-                                        <div class="invalid-feedback" th:errors="*{convidado}"></div>
-                                    </div>                                           
-                                    <div class="form-group col-md-6">
-                                        <label>Valor</label>
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">R$</span>
-                                            </div>
-                                            <input class="form-control last calc-add" type="number" step="0,0" th:errorclass="is-invalid" th:field="*{valor}" placeholder="Valor da reserva" />
-                                            <div class="invalid-feedback" th:errors="*{valor}"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col-md-6">
-                                        <label>Unidade</label> <select class="custom-select last" th:errorclass="is-invalid" th:field="*{moradia}">
-                                            <option th:unless="${param.somenteLeitura}" value="" hidden="true">Selecione</option>
-                                            <option th:if="${#lists.isEmpty(moradias)}" value="" disabled>Não há moradias cadastradas</option>
-                                            <option th:each="m : ${moradias}" th:value="${m.idMoradia}" th:text="${m}"></option>
-                                        </select>
-                                        <div class="invalid-feedback" th:errors="*{moradia}"></div>
-                                    </div>
-                                    <div class="form-group col-md-3">
-                                        <label>Motivo da Reserva</label> <select class="custom-select" id="motivoReserva" th:errorclass="is-invalid" th:field="*{motivoReserva}">
-                                            <option th:unless="${param.somenteLeitura}" value="" hidden="true">Selecione</option>
-                                            <option th:each="motivo : ${motivosReserva}" th:value="${motivo}" th:text="${motivo.nome}"></option>
-                                        </select>
-                                        <div class="invalid-feedback" th:errors="*{motivoReserva}"></div>
-                                    </div>   
-
-                                    <div class="form-group col-md-12">
-                                        <label>Observação</label>
-                                        <textarea class="form-control" rows="3" th:errorclass="is-invalid" th:field="*{observacao}" placeholder="Outros detalhes da reserva."></textarea>
-                                        <div class="invalid-feedback" th:errors="*{observacao}"></div>
-                                    </div>  
-                                </div>
-                            </li>
-                            <li th:unless="${reserva.idReserva == null}" class="list-group-item">
-                                <p class="text-primary">
-                                    <i class="fas fa-hand-holding-usd"></i> Acompanhamento da Reserva
-                                </p>
-                                <div class="form-row">
-                                    <div class="form-group col-md-4">
-                                        <label>Situação</label> <select class="custom-select" id="situacaoReserva" th:errorclass="is-invalid" th:field="*{situacaoReserva}">
-                                            <option th:unless="${param.somenteLeitura}" value="" hidden="true">Selecione</option>
-                                            <option th:each="situacaoReserva : ${situacoesReserva}" th:value="${situacaoReserva}" th:text="${situacaoReserva.nome}"></option>
-                                        </select>
-                                        <div class="invalid-feedback" th:errors="*{situacaoReserva}"></div>
-                                    </div>
-                                    <div class="form-group col-md-4">
-                                        <label>Data da aprovação</label> <input class="form-control" type="date" th:errorclass="is-invalid" th:field="*{dataConfirmacao}" placeholder="Data de confirmação" />
-                                        <div class="invalid-feedback" th:errors="*{dataConfirmacao}"></div>
-                                    </div>
-                                    <div class="form-group col-md-4">
-                                        <label>Motivo do indeferimento</label> <select class="custom-select" id="motivoReservaIndeferida" th:errorclass="is-invalid" th:field="*{motivoReservaIndeferida}">
-                                            <option th:unless="${param.somenteLeitura}" value="" hidden="true">Selecione</option>
-                                            <option value="">---</option>
-                                            <option th:each="motivo : ${motivosReservaIndeferida}" th:value="${motivo}" th:text="${motivo.nome}"></option>
-                                        </select>
-                                        <div class="invalid-feedback" th:errors="*{motivoReservaIndeferida}"></div>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </fieldset>
-                <button th:unless="${param.somenteLeitura}" type="submit" class="btn btn-success">Salvar</button>
-                <a class="btn btn-danger" th:href="@{/sindico/reservas}" role="button" th:text="${param.somenteLeitura}?'Voltar':_">Cancelar</a>
-            </form>
-        </main>
-    </th:block>
-    <th:block th:fragment="jsAdicional"></th:block>
+</head>
+<body>
+	<th:block th:fragment="conteudo">
+		<main role="main">
+		<h3 class="font-weight-light">Cadastro do Reserva</h3>
+		<div th:unless="${haCondominio}" class="alert alert-warning">
+			<h6>Condomínio não cadastrado</h6>
+			Para cadastrar reservas é preciso completar o cadastro do seu condomínio, <a class="text-warning" th:href="@{/sindico/condominio/cadastro}">clique aqui</a>.
+		</div>
+		<p th:if="${haCondominio}" th:text="${reserva.idReserva == null} ? 'Ao salvar, uma nova reserva será adicionada no condomínio.' : (${param.somenteLeitura} ? 'As informações não podem ser alteradas neste modo.' :  'Ao salvar, as informações do reserva atual serão atualizadas.')"></p>
+		<form th:if="${haCondominio}" th:action="@{/sindico/reservas/cadastro}" th:object="${reserva}" th:method="${reserva.idReserva == null} ? post : put" novalidate>
+			<fieldset th:disabled="${param.somenteLeitura}" class="mb-3">
+				<input type="hidden" th:field="*{condominio}" /> <input type="hidden" th:field="*{idReserva}" />
+				<div class="card">
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item">
+							<p class="text-success">
+								<!--<i class="far fa-calendar-alt"></i> Calendário-->
+							</p>
+							<div class="form-row ">
+								<div class="form-group col-md-4 text-success" th:classappend="${reserva.idReserva == null}?'col-md-3':'col-md-4'">
+									<label ><i class="far fa-calendar-alt bg-light text-success"></i> Data da Reserva</label> <input autofocus class="form-control" type="date" th:errorclass="is-invalid" th:field="*{dia}" placeholder="Dia da reserva" />
+									<div class="invalid-feedback" th:errors="*{dia}"></div>
+								</div>
+                                                        
+						   
+                                                          <div class="form-group col-md-4">
+									<label>Área Comum</label> <select class="custom-select" id="tipo" th:errorclass="is-invalid" th:field="*{tipo}">
+										<option th:unless="${param.somenteLeitura}" value="" hidden="true">Selecione</option>
+										<option th:each="tipo : ${tipos}" th:value="${tipo}" th:text="${tipo.nome}"></option>
+									</select>
+									<div class="invalid-feedback" th:errors="*{tipo}"></div>
+								</div>
+                                                            
+                                                            <div class="form-row">
+								<div class="form-group col-md-3">
+									<label>Unidade</label> <input autofocus class="form-control" type="text" th:errorclass="is-invalid" th:field="*{sigla}" placeholder="Unidade" />
+									<div class="invalid-feedback" th:errors="*{sigla}"></div>
+								</div>
+							
+                                                            <div class="form-row">
+								<div class="form-group col-md-4">
+									<label>Convidado</label> <input autofocus class="form-control" type="text" th:errorclass="is-invalid" th:field="*{convidado}" placeholder="Convidado" />
+									<div class="invalid-feedback" th:errors="*{convidado}"></div>
+								</div>
+                                                            
+                                                            
+                                                                <div class="form-group col-md-6">
+									<label>Valor</label>
+									<div class="input-group">
+										<div class="input-group-prepend">
+											<span class="input-group-text">R$</span>
+										</div>
+										<input class="form-control last calc-add" type="number" step="0,0" th:errorclass="is-invalid" th:field="*{valor}" placeholder="Valor da reserva" />
+										<div class="invalid-feedback" th:errors="*{valor}"></div>
+									</div>
+                                                                </div>
+                                                                </div>
+                                                                
+							
+                                                                        
+                                                             <div class="form-group col-md-12">
+								<label>Observação</label>
+								<textarea class="form-control" rows="3" th:errorclass="is-invalid" th:field="*{observacao}" placeholder="Outros detalhes da reserva."></textarea>
+								<div class="invalid-feedback" th:errors="*{observacao}"></div>
+							</div>
+						</div>
+						</li>
+					</ul>
+				</div>
+			</fieldset>
+			<button th:unless="${param.somenteLeitura}" type="submit" class="btn btn-success">Salvar</button>
+			<a class="btn btn-danger" th:href="@{/sindico/reservas}" role="button" th:text="${param.somenteLeitura}?'Voltar':_">Cancelar</a>
+		</form>
+	</main>
+	</th:block>
+	<th:block th:fragment="jsAdicional"></th:block>
 </body>
 </html>

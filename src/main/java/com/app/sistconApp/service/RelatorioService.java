@@ -186,5 +186,7 @@ public interface RelatorioService {
 	 *         houverem entradas, retorna um mapa vazio.
 	 */
 	public Map<Categoria, BigDecimal[]> somaOrcadoRealizadoCategorias(Periodo periodo);
+        
+        long getNumeroInformativos();
 
 }

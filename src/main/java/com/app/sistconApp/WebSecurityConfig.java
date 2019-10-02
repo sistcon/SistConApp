@@ -22,7 +22,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		// @formatter:off
 		http.authorizeRequests()
-			//.antMatchers("/","/js/**","/css/**","/imagens/**","/webfonts/**").permitAll()
+			//.antMatchers("/","/js/**","/css/**","/imagens/**","/webfonts/**").permitAll()                       
 			.antMatchers("/sindico/**").hasAuthority("SINDICO")// .access("hasRole('ROLE_SINDICO')")
 			.antMatchers("/condomino/**").hasAuthority("CONDOMINO")// .access("hasRole('ROLE_MORADOR')")
 			.antMatchers("/admin/**").hasAuthority("ADMIN")// .access("hasRole('ROLE_MORADOR')")

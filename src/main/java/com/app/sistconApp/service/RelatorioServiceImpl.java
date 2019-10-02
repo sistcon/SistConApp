@@ -9,6 +9,7 @@ import com.app.sistconApp.modelo.Orcamento;
 import com.app.sistconApp.modelo.Periodo;
 import com.app.sistconApp.modelo.Subcategoria;
 import com.app.sistconApp.modelo.enums.TipoCategoria;
+import com.app.sistconApp.repository.InformativoRepository;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.YearMonth;
@@ -51,6 +52,9 @@ public class RelatorioServiceImpl implements RelatorioService {
 
 	@Autowired
 	CategoriaService categoriaService;
+        
+        @Autowired
+        InformativoRepository informativoRepository;
 
 	@Override
 	public BigDecimal saldoAtualTodasContas() {
@@ -301,4 +305,8 @@ public class RelatorioServiceImpl implements RelatorioService {
 		}
 		return mapa;
 	}
+        
+        public long getNumeroInformativos(){
+            return informativoRepository.numeroInformativos();
+        }
 }

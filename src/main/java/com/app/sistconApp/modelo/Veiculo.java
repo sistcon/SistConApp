@@ -5,12 +5,9 @@
  */
 package com.app.sistconApp.modelo;
 
-import com.app.sistconApp.modelo.enums.TipoOcorrencia;
+import com.app.sistconApp.modelo.enums.TipoVeiculo;
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Objects;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -25,7 +22,6 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
@@ -33,52 +29,73 @@ import org.springframework.format.annotation.DateTimeFormat;
  */
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "ocorrencias")
-public class Ocorrencia implements Serializable, Comparable<Ocorrencia> {
+@Table(name = "veiculos")
+public class Veiculo implements Serializable, Comparable<Veiculo> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idocorrencia")
-    private Long idOcorrencia;
+    @Column(name = "idveiculo")
+    private Long idVeiculo;
 
-    @NotNull
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    private LocalDate dia;
+    @Size(max = 100)
+    @NotBlank
+    private String modelo;
 
-    @Size(min = 2, max = 5)
+    @Size(max = 100)
+    @NotBlank
+    private String marca;
+
+    @Size(max = 15)
+    @NotBlank
+    private String placa;
+
+    @Size(min = 2, max = 7)
     @NotBlank
     private String sigla;
 
     @NotNull
     @Enumerated(EnumType.STRING)
-    private TipoOcorrencia tipo;
-
-    @Size(max = 255)
-    private String descricao;
+    private TipoVeiculo tipo;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idcondominio")
     private Condominio condominio;
-    
+
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idmoradia")
     private Moradia moradia;
 
-    public Long getIdOcorrencia() {
-        return idOcorrencia;
+    public Long getIdVeiculo() {
+        return idVeiculo;
     }
 
-    public void setIdOcorrencia(Long idOcorrencia) {
-        this.idOcorrencia = idOcorrencia;
+    public void setIdVeiculo(Long idVeiculo) {
+        this.idVeiculo = idVeiculo;
     }
 
-    public LocalDate getDia() {
-        return dia;
+    public String getModelo() {
+        return modelo;
     }
 
-    public void setDia(LocalDate dia) {
-        this.dia = dia;
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
+    }
+
+    public String getMarca() {
+        return marca;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
+    public String getPlaca() {
+        return placa;
+    }
+
+    public void setPlaca(String placa) {
+        this.placa = placa;
     }
 
     public String getSigla() {
@@ -89,23 +106,14 @@ public class Ocorrencia implements Serializable, Comparable<Ocorrencia> {
         this.sigla = sigla;
     }
 
-    public TipoOcorrencia getTipo() {
+    public TipoVeiculo getTipo() {
         return tipo;
     }
 
-    public void setTipo(TipoOcorrencia tipo) {
+    public void setTipo(TipoVeiculo tipo) {
         this.tipo = tipo;
     }
 
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
-    
     public Condominio getCondominio() {
         return condominio;
     }
@@ -121,19 +129,11 @@ public class Ocorrencia implements Serializable, Comparable<Ocorrencia> {
     public void setMoradia(Moradia moradia) {
         this.moradia = moradia;
     }
-    
-    
-    
- @Override
-    public String toString() {
-        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        return dia.format(formato);
-    }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 83 * hash + Objects.hashCode(this.idOcorrencia);
+        hash = 97 * hash + Objects.hashCode(this.idVeiculo);
         return hash;
     }
 
@@ -148,18 +148,16 @@ public class Ocorrencia implements Serializable, Comparable<Ocorrencia> {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Ocorrencia other = (Ocorrencia) obj;
-        if (!Objects.equals(this.idOcorrencia, other.idOcorrencia)) {
+        final Veiculo other = (Veiculo) obj;
+        if (!Objects.equals(this.idVeiculo, other.idVeiculo)) {
             return false;
         }
         return true;
     }
 
     @Override
-    public int compareTo(Ocorrencia o) {
-        return this.dia.compareTo(o.getDia());
+    public int compareTo(Veiculo o) {
+        return this.sigla.compareTo(o.getSigla());
     }
-    
 
- 
 }
