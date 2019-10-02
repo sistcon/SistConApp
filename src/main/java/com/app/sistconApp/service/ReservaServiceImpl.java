@@ -95,6 +95,23 @@ public class ReservaServiceImpl implements ReservaService {
 					usuarioService.lerLogado().getCondominio(), entidade.getIdReserva())) {
 				validacao.rejectValue("sigla", "Unique");
 			}
+                       if (entidade.getDataConfirmacao()!= null) {
+				// Data da confirmação tem que ser menor/igual a data
+				if (entidade.getDataConfirmacao().isBefore(entidade.getDataConfirmacao())) {
+					validacao.rejectValue("dataConfirmacao", "typeMismatch");
+				}
+				// Motivo baixa é obrigatório se tiver recebimento
+				if (entidade.getMotivoReservaIndeferida()== null) {
+					validacao.rejectValue("motivoReservaIndeferida", "NotNull");
+				}
+				// Motivo baixa é em branco se NÃO tiver recebimento
+			} else if (entidade.getMotivoReservaIndeferida()!= null) {
+				validacao.rejectValue("motivoReservaIndeferida", "Null");
+			}
+			// Situação Cobrança não pode ser nula
+			if (entidade.getSituacaoReserva() == null) {
+				validacao.rejectValue("situacaoReserva", "NotNull");
+			}
 		}
 		// VALIDAÇÕES EM AMBOS
 	}

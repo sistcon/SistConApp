@@ -7,18 +7,17 @@ package com.app.sistconApp.modelo.enums;
 
 /**
  *
- * @author Jadna Cavalcante
+ * @author Marcelo Fernandes
  */
-public enum TipoReserva {
-        CH("Churrasqueira"),
-	QU("Quadra"),
-	SA("Salao"),
-        SC("Salão e Churrasqueira");
-        
+public enum MotivoReservaIndeferida {
+        NH("Nenhum"),
+        IN("Inadimplência"),
+	JA("Já Resevada"),
+	SA("Desistiu");
         
         private final String nome;
 
-	private TipoReserva(String nome) {
+	private MotivoReservaIndeferida(String nome) {
 		this.nome = nome;
 	}
 

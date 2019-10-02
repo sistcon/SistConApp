@@ -5,10 +5,15 @@
  */
 package com.app.sistconApp.controller;
 
-
+import com.app.sistconApp.modelo.Moradia;
 import com.app.sistconApp.modelo.Reserva;
+import com.app.sistconApp.modelo.enums.MotivoReserva;
+import com.app.sistconApp.modelo.enums.MotivoReservaIndeferida;
+import com.app.sistconApp.modelo.enums.SituacaoReserva;
 import com.app.sistconApp.modelo.enums.TipoReserva;
+import com.app.sistconApp.service.MoradiaService;
 import com.app.sistconApp.service.ReservaService;
+import java.util.List;
 import java.util.Optional;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,68 +38,89 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("sindico/reservas")
 public class ReservaController {
+
+    @Autowired
+    private ReservaService reservaService;
     
     @Autowired
-	private ReservaService reservaService;
-    
+    MoradiaService moradiaService;
+
     @ModelAttribute("ativo")
-	public String[] ativo() {
-		return new String[] { "condominio", "reservas" };
-	}
-        
-        @ModelAttribute("tipos")
+    public String[] ativo() {
+        return new String[]{"condominio", "reservas"};
+    }
+
+    @ModelAttribute("tipos")
     public TipoReserva[] tipos() {
         return TipoReserva.values();
     }
 
-        
-        @GetMapping({ "", "/", "/lista" })
-	public ModelAndView getReservas(@RequestParam("pagina") Optional<Integer> pagina,
-			@RequestParam("tamanho") Optional<Integer> tamanho, ModelMap model) {
-		model.addAttribute("reservas",
-				reservaService.listarPagina(PageRequest.of(pagina.orElse(1) - 1, tamanho.orElse(20))));
-		model.addAttribute("conteudo", "reservaLista");
-		return new ModelAndView("fragmentos/layoutSindico", model);
-	}
+    @ModelAttribute("motivosReserva")
+    public MotivoReserva[] motivosReserva() {
+        return MotivoReserva.values();
+    }
 
-	@GetMapping("/cadastro")
-	public ModelAndView getReservaCadastro(@ModelAttribute("reserva") Reserva reserva) {
-		return new ModelAndView("fragmentos/layoutSindico", "conteudo", "reservaCadastro");
-	}
+    @ModelAttribute("motivosReservaIndeferida")
+    public MotivoReservaIndeferida[] motivosReservaIndeferida() {
+        return MotivoReservaIndeferida.values();
+    }
 
-	@GetMapping("/{idReserva}/cadastro")
-	public ModelAndView getReservaEditar(@PathVariable("idReserva") Long idReserva, ModelMap model) {
-		model.addAttribute("reserva", reservaService.ler(idReserva));
-		model.addAttribute("conteudo", "reservaCadastro");
-		return new ModelAndView("fragmentos/layoutSindico", model);
-	}
+    @ModelAttribute("situacoesReserva")
+    public SituacaoReserva[] situacoesReserva() {
+        return SituacaoReserva.values();
+    }
 
-	@PostMapping("/cadastro")
-	public ModelAndView postReservaCadastro(@Valid @ModelAttribute("reserva") Reserva reserva, BindingResult validacao) {
-		reservaService.validar(reserva, validacao);
-		if (validacao.hasErrors()) {
-			reserva.setIdReserva(null);
-			return new ModelAndView("fragmentos/layoutSindico", "conteudo", "reservaCadastro");
-		}
-		reservaService.salvar(reserva);
-		return new ModelAndView("redirect:/sindico/reservas");
-	}
+    @ModelAttribute("moradias")
+    public List<Moradia> moradias() {
+        return moradiaService.listar();
+    }
 
-	@PutMapping("/cadastro")
-	public ModelAndView putReservaCadastro(@Valid @ModelAttribute("reserva") Reserva reserva, BindingResult validacao) {
-		reservaService.validar(reserva, validacao);
-		if (validacao.hasErrors()) {
-			return new ModelAndView("fragmentos/layoutSindico", "conteudo", "reservaCadastro");
-		}
-		reservaService.editar(reserva);
-		return new ModelAndView("redirect:/sindico/reservas");
-	}
+    @GetMapping({"", "/", "/lista"})
+    public ModelAndView getReservas(@RequestParam("pagina") Optional<Integer> pagina,
+            @RequestParam("tamanho") Optional<Integer> tamanho, ModelMap model) {
+        model.addAttribute("reservas",
+                reservaService.listarPagina(PageRequest.of(pagina.orElse(1) - 1, tamanho.orElse(20))));
+        model.addAttribute("conteudo", "reservaLista");
+        return new ModelAndView("fragmentos/layoutSindico", model);
+    }
 
-	@DeleteMapping("/excluir")
-	public ModelAndView deleteReservaCadastro(@RequestParam("idObj") Long idObj) {
-		reservaService.excluir(reservaService.ler(idObj));
-		return new ModelAndView("redirect:/sindico/reservas");
-	}
+    @GetMapping("/cadastro")
+    public ModelAndView getReservaCadastro(@ModelAttribute("reserva") Reserva reserva) {
+        return new ModelAndView("fragmentos/layoutSindico", "conteudo", "reservaCadastro");
+    }
 
-    
+    @GetMapping("/{idReserva}/cadastro")
+    public ModelAndView getReservaEditar(@PathVariable("idReserva") Long idReserva, ModelMap model) {
+        model.addAttribute("reserva", reservaService.ler(idReserva));
+        model.addAttribute("conteudo", "reservaCadastro");
+        return new ModelAndView("fragmentos/layoutSindico", model);
+    }
+
+    @PostMapping("/cadastro")
+    public ModelAndView postReservaCadastro(@Valid @ModelAttribute("reserva") Reserva reserva, BindingResult validacao) {
+        reservaService.validar(reserva, validacao);
+        if (validacao.hasErrors()) {
+            reserva.setIdReserva(null);
+            return new ModelAndView("fragmentos/layoutSindico", "conteudo", "reservaCadastro");
+        }
+        reservaService.salvar(reserva);
+        return new ModelAndView("redirect:/sindico/reservas");
+    }
+
+    @PutMapping("/cadastro")
+    public ModelAndView putReservaCadastro(@Valid @ModelAttribute("reserva") Reserva reserva, BindingResult validacao) {
+        reservaService.validar(reserva, validacao);
+        if (validacao.hasErrors()) {
+            return new ModelAndView("fragmentos/layoutSindico", "conteudo", "reservaCadastro");
+        }
+        reservaService.editar(reserva);
+        return new ModelAndView("redirect:/sindico/reservas");
+    }
+
+    @DeleteMapping("/excluir")
+    public ModelAndView deleteReservaCadastro(@RequestParam("idObj") Long idObj) {
+        reservaService.excluir(reservaService.ler(idObj));
+        return new ModelAndView("redirect:/sindico/reservas");
+    }
+
 }

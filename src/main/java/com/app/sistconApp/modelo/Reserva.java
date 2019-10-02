@@ -5,6 +5,9 @@
  */
 package com.app.sistconApp.modelo;
 
+import com.app.sistconApp.modelo.enums.MotivoReserva;
+import com.app.sistconApp.modelo.enums.MotivoReservaIndeferida;
+import com.app.sistconApp.modelo.enums.SituacaoReserva;
 import com.app.sistconApp.modelo.enums.TipoReserva;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -68,9 +71,70 @@ public class Reserva implements Serializable, Comparable<Reserva> {
     @Size(max = 255)
     private String observacao;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "situacoreserva")
+    private SituacaoReserva situacaoReserva;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "motivoreserva")
+    private MotivoReserva motivoReserva;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "motivoreservaindeferida")
+    private MotivoReservaIndeferida motivoReservaIndeferida;
+
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    @Column(name = "dataconfirmacao")
+    private LocalDate dataConfirmacao;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idcondominio")
     private Condominio condominio;
+
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idmoradia")
+    private Moradia moradia;
+
+    public Moradia getMoradia() {
+        return moradia;
+    }
+
+    public void setMoradia(Moradia moradia) {
+        this.moradia = moradia;
+    }
+
+    public MotivoReservaIndeferida getMotivoReservaIndeferida() {
+        return motivoReservaIndeferida;
+    }
+
+    public void setMotivoReservaIndeferida(MotivoReservaIndeferida motivoReservaIndeferida) {
+        this.motivoReservaIndeferida = motivoReservaIndeferida;
+    }
+
+    public MotivoReserva getMotivoReserva() {
+        return motivoReserva;
+    }
+
+    public void setMotivoReserva(MotivoReserva motivoReserva) {
+        this.motivoReserva = motivoReserva;
+    }
+
+    public SituacaoReserva getSituacaoReserva() {
+        return situacaoReserva;
+    }
+
+    public void setSituacaoReserva(SituacaoReserva situacaoReserva) {
+        this.situacaoReserva = situacaoReserva;
+    }
+
+    public LocalDate getDataConfirmacao() {
+        return dataConfirmacao;
+    }
+
+    public void setDataConfirmacao(LocalDate dataConfirmacao) {
+        this.dataConfirmacao = dataConfirmacao;
+    }
 
     public Long getIdReserva() {
         return idReserva;
