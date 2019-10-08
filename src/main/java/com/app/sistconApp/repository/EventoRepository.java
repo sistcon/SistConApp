@@ -9,6 +9,7 @@ import com.app.sistconApp.modelo.Condominio;
 import com.app.sistconApp.modelo.Evento;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
@@ -24,4 +25,7 @@ public interface EventoRepository extends PagingAndSortingRepository<Evento, Lon
     Boolean existsBySiglaAndCondominioAndIdEventoNot(String sigla, Condominio condominio, Long idEvento);
 
     Page<Evento> findAllByCondominioOrderBySiglaAsc(Condominio condominio, Pageable pagina);
+    
+    @Query("SELECT COUNT(e) FROM Evento e")
+       Long numeroEventos();
 }

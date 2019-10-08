@@ -9,7 +9,9 @@ import com.app.sistconApp.modelo.Orcamento;
 import com.app.sistconApp.modelo.Periodo;
 import com.app.sistconApp.modelo.Subcategoria;
 import com.app.sistconApp.modelo.enums.TipoCategoria;
+import com.app.sistconApp.repository.EventoRepository;
 import com.app.sistconApp.repository.InformativoRepository;
+import com.app.sistconApp.repository.OcorrenciaRepository;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.YearMonth;
@@ -55,6 +57,12 @@ public class RelatorioServiceImpl implements RelatorioService {
         
         @Autowired
         InformativoRepository informativoRepository;
+        
+        @Autowired
+        OcorrenciaRepository ocorrenciaRepository;
+        
+        @Autowired
+        EventoRepository eventoRepository;
 
 	@Override
 	public BigDecimal saldoAtualTodasContas() {
@@ -308,5 +316,11 @@ public class RelatorioServiceImpl implements RelatorioService {
         
         public long getNumeroInformativos(){
             return informativoRepository.numeroInformativos();
+        }
+        public long getNumeroOcorrencias(){
+            return ocorrenciaRepository.numeroOcorrencias();
+        }
+        public long getNumeroEventos(){
+            return eventoRepository.numeroEventos();
         }
 }

@@ -21,12 +21,12 @@
 				<div class="card">
 					<ul class="list-group list-group-flush" id="accordion">
 						<li class="list-group-item">
-							<p class="text-primary">
+							<p class="text-success">
 								<i class="fas fa-list-ol"></i> Informações principais
 							</p>
 							<div class="form-row">
 								<div class="form-group col-md-6">
-									<label>Classe <a class="text-secondary" tabindex="-1" data-toggle="modal" href="#modalInfo" title="O que é isso?"><i class="fas fa-question-circle"></i></a></label> <select required class="custom-select" name="form-accordion-select" data-form="main form" data-parent="#accordion .collapse" autofocus th:disabled="${categoria.idCategoria != null}">
+									<label>Classe <a class="text-success" tabindex="-1" data-toggle="modal" href="#modalInfo" title="O que é isso?"><i class="fas fa-question-circle"></i></a></label> <select required class="custom-select" name="form-accordion-select" data-form="main form" data-parent="#accordion .collapse" autofocus th:disabled="${categoria.idCategoria != null}">
 										<option th:unless="${param.somenteLeitura}" value="" hidden="true">Selecione</option>
 										<option th:each="t : ${tiposClasseCategoria}" th:value="${t}" th:text="${t.nome}" th:selected="${t == #ctx.classe}" data-toggle="collapse" th:data-target="'#'+ ${t}" th:data-form-action="@{/sindico/{sub}categorias/cadastro/(sub=(${t == T(com.app.sistconApp.modelo.enums.TipoClasseCategoria).S} ? 'sub' : ''))}"></option>
 									</select>
@@ -87,8 +87,8 @@
 					</ul>
 				</div>
 			</fieldset>
-			<button th:unless="${param.somenteLeitura}" type="submit" class="btn btn-primary">Salvar</button>
-			<a class="btn btn-secondary" th:href="@{/sindico/categorias}" role="button" th:text="${param.somenteLeitura}?'Voltar':_">Cancelar</a>
+			<button th:unless="${param.somenteLeitura}" type="submit" class="btn btn-success">Salvar</button>
+			<a class="btn btn-danger" th:href="@{/sindico/categorias}" role="button" th:text="${param.somenteLeitura}?'Voltar':_">Cancelar</a>
 		</form>
 		</main>
 		<!--/* Modal */-->

@@ -189,4 +189,7 @@ public interface RelatorioService {
         
         long getNumeroInformativos();
 
+        long getNumeroOcorrencias();
+        long getNumeroEventos();
+
 }
