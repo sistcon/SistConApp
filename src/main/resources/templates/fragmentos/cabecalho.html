@@ -26,15 +26,21 @@
 							<!--<li class="nav-item"><a th:classappend="${ativo[0] == 'conta'}? 'active'" class="nav-link" th:href="@{/conta/cadastrar}">Registrar</a></li>-->
 						</ul>
 						<div sec:authorize="isAnonymous()">
-							<form class="form-inline ml-0 ml-lg-5" th:action="@{/entrar}" method="get">
-								<button class="btn btn-success my-2 my-sm-0" type="submit">Entrar</button>
-							</form>
+							<form class="form-inline mt-2 mt-md-0" th:action="@{/entrar}" method="get">
+                                                            <div class="form-check mb-2 mr-sm-2">
+								<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
+							
+                                                    </div>
+                                                            <div class="form-check mb-2 mr-sm-2">
+                                                                <a class="btn btn-outline-success my-2 my-sm-0" roles="button" th:href="@{/conta/cadastro}">Meu Cadastro</a>
+                                                            </div>
+                                                            </form>
 						</div>
-						<div sec:authorize="isAuthenticated()">
+						<!--<div sec:authorize="isAuthenticated()">
 							<form class="form-inline mt-2 mt-md-0" th:action="@{/entrar}" method="post">
 								<div class="btn-group">
 									<button class="btn btn-danger my-2 my-sm-0" type="submit">Sair</button>
-									<!--<button type="button" class="btn btn-white dropdown-toggle dropdown-toggle-split  my-2 my-sm-0" data-toggle="dropdown"></button>
+									<button type="button" class="btn btn-white dropdown-toggle dropdown-toggle-split  my-2 my-sm-0" data-toggle="dropdown"></button>
 									<div class="dropdown-menu dropdown-menu-md-right bg-secondary">
 										<a sec:authorize="hasAuthority('SINDICO')" class="dropdown-item" th:href="@{/sindico}">Condomínio</a>
 										<a sec:authorize="hasAuthority('MORADOR')" class="dropdown-item" th:href="@{/morador}">Condômino</a>
@@ -42,10 +48,28 @@
 										<a class="dropdown-item" th:href="@{/conta/cadastro}">Meu Cadastro</a>
 										<div class="dropdown-divider"></div>
 										<button class="dropdown-item " type="submit">Sair <i class="fas fa-sign-out-alt ml-3 "></i></button>
-									</div>-->
+									</div>
 								</div>
 							</form>
-						</div>
+						</div>-->
+                                            <div sec:authorize="isAuthenticated()">
+                                            <form class="form-inline mt-2 mt-md-0" th:action="@{/entrar}" method="post">
+								<div class="btn-group mb-2 mr-sm-2">
+                                                                    <button type="button" class="btn btn-light">
+                                                                        <i class="fas fa-user"></i> <span class="">bob</span>
+                                                                    </button>
+                                                                    <button type="button"
+                                                                            class="btn btn-danger dropdown-toggle dropdown-toggle-split"
+                                                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                                
+                                                                    </button>
+                                                                    
+                                                                    <div class="dropdown-menu">
+                                                                        <button type="submit" class="dropdown-item bg-light">Sair</button>
+                                                                
+                                                                </div>
+                                                                    </div>
+                                            </form>
 					</div>
 				
 			</nav>
