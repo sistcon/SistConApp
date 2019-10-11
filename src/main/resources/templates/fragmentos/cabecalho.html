@@ -19,13 +19,13 @@
                                                     
                             
 							<li class="nav-item"><a th:classappend="${ativo[0] == 'inicio'}? 'active'" class="nav-link text-white" th:href="@{/}"></li><i class="fas fa-home"></i> Início</a>
-                                                        <li class="nav-item"><a th:classappend="${ativo[0] == 'condominio'}? 'active'" class="nav-link text-white" th:href="@{/sindico}">Condomínio</a></li>
+                                                        <!--<li class="nav-item"><a th:classappend="${ativo[0] == 'condominio'}? 'active'" class="nav-link text-white" th:href="@{/sindico}">Condomínio</a></li>
                                                         <li class="nav-item"><a th:classappend="${ativo[0] == 'moradores'}? 'active'" class="nav-link text-white" th:href="@{/moradores}">Morador</a></li>
                                                         <li class="nav-item"><a th:classappend="${ativo[0] == 'administrativo'}? 'active'" class="nav-link text-white" th:href="@{/admin}">Administrativo</a></li>
                                                         <li class="nav-item"><a th:classappend="${ativo[0] == 'meu cadastro'}? 'active'" class="nav-link text-white" th:href="@{/conta/cadastro}">Meu Cadastro</a></li>
-							<!--<li class="nav-item"><a th:classappend="${ativo[0] == 'conta'}? 'active'" class="nav-link" th:href="@{/conta/cadastrar}">Registrar</a></li>-->
+							<li class="nav-item"><a th:classappend="${ativo[0] == 'conta'}? 'active'" class="nav-link" th:href="@{/conta/cadastrar}">Registrar</a></li>-->
 						</ul>
-						<div sec:authorize="isAnonymous()">
+						<div sec:authorize="isAuthenticated()">
 							<form class="form-inline mt-2 mt-md-0" th:action="@{/entrar}" method="get">
                                                             <div class="form-check mb-2 mr-sm-2">
 								<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
@@ -56,7 +56,7 @@
                                             <form class="form-inline mt-2 mt-md-0" th:action="@{/entrar}" method="post">
 								<div class="btn-group mb-2 mr-sm-2">
                                                                     <button type="button" class="btn btn-light">
-                                                                        <i class="fas fa-user"></i> <span class="">bob</span>
+                                                                        <i class="fas fa-user"></i> <span class="" sec:authentication="name">bob</span>
                                                                     </button>
                                                                     <button type="button"
                                                                             class="btn btn-danger dropdown-toggle dropdown-toggle-split"
