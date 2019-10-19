@@ -141,5 +141,11 @@ public class RelatorioController {
         model.addAttribute("relatorio", "relatorioOrcamento");
         return new ModelAndView("fragmentos/layoutRelatorio", model);
     }
+    
+    @GetMapping("/moradores")
+    public ModelAndView getMoradores(ModelMap model){
+        
+        return new ModelAndView("fragmentos/layoutRelatorio", model);
+    }
 
 }

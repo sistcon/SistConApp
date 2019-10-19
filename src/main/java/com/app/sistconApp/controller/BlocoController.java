@@ -24,7 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 @Controller
-@RequestMapping("sindico/blocos")
+@RequestMapping({"sindico/blocos","condomino/blocos"})
 public class BlocoController {
 
 	@Autowired

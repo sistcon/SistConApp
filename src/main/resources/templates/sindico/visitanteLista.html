@@ -33,11 +33,11 @@
 					</tr>
 				</thead>
 				<tbody>
-					        <tr th:each="visitante : ${visitantes.content}">
-                                                <td th:text="${visitante.nome}"></td>
-                                                <td th:text="${visitante.rg}"></td>
-                                                <!--<th scope="row" th:text="${visitante.sigla}"></th>-->
-                                                <td th:text="${visitante.moradia}"></td>
+                                                        <tr th:each="visitante : ${visitantes.content}">
+                                                        <td th:text="${visitante.nome}"></td>
+                                                        <td th:text="${visitante.rg}"></td>
+                                                        <!--<th scope="row" th:text="${visitante.sigla}"></th>-->
+                                                        <td th:text="${visitante.moradia}"></td>
                                                 
                                                 
 						<td><a class="btn btn-outline-secondary btn-sm" th:href="@{/sindico/visitantes/{idVisitante}/cadastro(idVisitante=${visitante.idVisitante},somenteLeitura)}">

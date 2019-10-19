@@ -27,36 +27,38 @@ import org.springframework.validation.BindingResult;
 @Service
 @Transactional
 public class MoradorServiceImpl implements MoradorService {
-    
+
     @Autowired
     private MoradorRepository moradorRep;
-    
-     @Autowired
+
+    @Autowired
     private UsuarioService usuarioService;
-     
-     
-      @Override
+
+    @Override
     public void salvar(Morador entidade) {
         if (entidade.getIdMorador() == null) {
             padronizar(entidade);
             moradorRep.save(entidade);
         }
     }
+
     @Override
     @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
     public Morador ler(Long id) {
         return moradorRep.findById(id).get();
     }
+
     @Override
     @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
     public List<Morador> listar() {
-        
+
         Condominio condominio = usuarioService.lerLogado().getCondominio();
         if (condominio == null) {
             return new ArrayList<>();
         }
         return condominio.getMoradores();
     }
+
     @Override
     public Page<Morador> listarPagina(Pageable pagina) {
         Condominio condominio = usuarioService.lerLogado().getCondominio();
@@ -65,7 +67,8 @@ public class MoradorServiceImpl implements MoradorService {
         }
         return moradorRep.findAllByCondominioOrderByNome(condominio, pagina);
     }
-     @Override
+
+    @Override
     public void editar(Morador entidade) {
         padronizar(entidade);
         moradorRep.save(entidade);
@@ -75,33 +78,33 @@ public class MoradorServiceImpl implements MoradorService {
     public void excluir(Morador entidade) {
         moradorRep.delete(entidade);
     }
-    @Override
-	@Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
-	public void validar(Morador entidade, BindingResult validacao) {
-		// VALIDAÇÕES NA INCLUSÃO
-		if (entidade.getIdMorador() == null) {
-			// Sigla não pode repetir
-			if (moradorRep.existsBySiglaAndCondominio(entidade.getSigla(), usuarioService.lerLogado().getCondominio())) {
-				validacao.rejectValue("sigla", "Unique");
-			}
-		}
-		// VALIDAÇÕES NA ALTERAÇÃO
-		else {
-			// Sigla não pode repetir
-			if (moradorRep.existsBySiglaAndCondominioAndIdMoradorNot(entidade.getSigla(),
-					usuarioService.lerLogado().getCondominio(), entidade.getIdMorador())) {
-				validacao.rejectValue("sigla", "Unique");
-			}
-		}
-		// VALIDAÇÕES EM AMBOS
-	}
 
-	@Override
-	@Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
-	public void padronizar(Morador entidade) {
-		if (entidade.getCondominio() == null) {
-			entidade.setCondominio(usuarioService.lerLogado().getCondominio());
-		}
-	}
+    @Override
+    @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
+    public void validar(Morador entidade, BindingResult validacao) {
+        // VALIDAÇÕES NA INCLUSÃO
+        if (entidade.getIdMorador() == null) {
+            // Sigla não pode repetir
+            if (moradorRep.existsBySiglaAndCondominio(entidade.getSigla(), usuarioService.lerLogado().getCondominio())) {
+                validacao.rejectValue("sigla", "Unique");
+            }
+        } // VALIDAÇÕES NA ALTERAÇÃO
+        else {
+            // Sigla não pode repetir
+            if (moradorRep.existsBySiglaAndCondominioAndIdMoradorNot(entidade.getSigla(),
+                    usuarioService.lerLogado().getCondominio(), entidade.getIdMorador())) {
+                validacao.rejectValue("sigla", "Unique");
+            }
+        }
+        // VALIDAÇÕES EM AMBOS
+    }
+
+    @Override
+    @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
+    public void padronizar(Morador entidade) {
+        if (entidade.getCondominio() == null) {
+            entidade.setCondominio(usuarioService.lerLogado().getCondominio());
+        }
+    }
 
 }

@@ -4,12 +4,14 @@ import com.app.sistconApp.modelo.Moradia;
 import com.app.sistconApp.modelo.Pessoa;
 import com.app.sistconApp.modelo.PessoaFisica;
 import com.app.sistconApp.modelo.PessoaJuridica;
+import com.app.sistconApp.modelo.Usuario;
 import com.app.sistconApp.modelo.enums.Estado;
 import com.app.sistconApp.modelo.enums.Genero;
 import com.app.sistconApp.modelo.enums.TipoPessoa;
 import com.app.sistconApp.modelo.enums.TipoRelacao;
 import com.app.sistconApp.service.MoradiaService;
 import com.app.sistconApp.service.PessoaService;
+import com.app.sistconApp.service.UsuarioService;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,6 +19,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -31,7 +34,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping({"sindico/pessoas","sindico/condominos"})
+@RequestMapping({"sindico/pessoas","condomino/pessoas"})
 public class PessoaController {
 
     @Autowired
@@ -39,6 +42,12 @@ public class PessoaController {
 
     @Autowired
     MoradiaService moradiaService;
+    
+    @Autowired
+    UsuarioService usuarioService;
+    
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @ModelAttribute("ativo")
     public String[] ativo() {
@@ -81,6 +90,7 @@ public class PessoaController {
 
     @GetMapping("/cadastro")
     public ModelAndView getPessoaCadastro(@ModelAttribute("pessoa") Pessoa pessoa, ModelMap model) {
+        
         model.addAttribute("tipo", "");
         model.addAttribute("conteudo", "pessoaCadastro");
         return new ModelAndView("fragmentos/layoutSindico", model);
@@ -111,7 +121,16 @@ public class PessoaController {
             return new ModelAndView("fragmentos/layoutSindico", model);
         }
         pessoaService.salvar(pessoa);
-        return new ModelAndView("redirect:/sindico/condominos");
+        Usuario usuario = new Usuario();
+        usuario.setNome(pessoa.getNome());
+        usuario.setAtivo(Boolean.TRUE);
+        usuario.setEmail(pessoa.getEmail());
+        usuario.setSobrenome(pessoa.getSobrenome());
+        usuario.setUsername(pessoa.getEmail());
+        usuario.setPassword("123");
+        usuarioService.salvarCondomino(usuario);
+        usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
+        return new ModelAndView("redirect:/sindico");
     }
 
     @PostMapping(value = "/cadastro", params = {"PJ"})

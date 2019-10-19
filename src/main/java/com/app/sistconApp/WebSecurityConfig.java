@@ -24,7 +24,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()
 			//.antMatchers("/","/js/**","/css/**","/imagens/**","/webfonts/**").permitAll()                       
 			.antMatchers("/sindico/**").hasAuthority("SINDICO")// .access("hasRole('ROLE_SINDICO')")
-			.antMatchers("/condomino/**").hasAuthority("CONDOMINO")// .access("hasRole('ROLE_MORADOR')")
+			.antMatchers("/condomino/**").hasAuthority("MORADOR")// .access("hasRole('ROLE_MORADOR')")
 			.antMatchers("/admin/**").hasAuthority("ADMIN")// .access("hasRole('ROLE_MORADOR')")
 			.antMatchers("/autenticado/**","/conta/cadastro/**").authenticated()
 			//.antMatchers("/conta/cadastrar/**","/entrar/**").anonymous()

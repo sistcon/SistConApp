@@ -34,7 +34,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @author Marcelo Fernandes
  */
 @Controller
-@RequestMapping("sindico/eventos")
+@RequestMapping({"sindico/eventos","condomino/eventos"})
 public class EventoController {
 
     @Autowired
