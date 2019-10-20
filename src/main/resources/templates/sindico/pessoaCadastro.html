@@ -22,7 +22,7 @@
                     <div class="card">
                         <ul class="list-group list-group-flush" id="accordion">
                             <li class="list-group-item">
-                                <p class="text-primary">
+                                <p class="text-success">
                                     <i class="fas fa-list"></i> Tipo de Morador
                                 </p>
                                 <div class="form-row">
@@ -37,7 +37,7 @@
                                 </div>
                             </li>
                             <li class="list-group-item collapse show" id="PF" th:if="${#ctx.tipo == T(com.app.sistconApp.modelo.enums.TipoPessoa).F}">
-                                <p class="text-primary">
+                                <p class="text-success">
                                     <i class="fas fa-user"></i> Informações principais
                                 </p>
                                 <div class="form-row">
@@ -74,7 +74,7 @@
                                 </div>
                             </li>  
                             <li class="list-group-item collapse" id="PF" th:unless="${#ctx.tipo == T(com.app.sistconApp.modelo.enums.TipoPessoa).F}">
-                                <p class="text-primary">
+                                <p class="text-success">
                                     <i class="fas fa-user"></i> Informações principais
                                 </p>
                                 <div class="form-row">
@@ -106,7 +106,7 @@
                                 </div>
                             </li>
                             <li class="list-group-item collapse show" id="PJ" th:if="${#ctx.tipo == T(com.app.sistconApp.modelo.enums.TipoPessoa).J}">
-                                <p class="text-primary">
+                                <p class="text-success">
                                     <i class="fas fa-user-tie"></i> Informações principais
                                 </p>
                                 <div class="form-row">
@@ -146,7 +146,7 @@
                                 </div>
                             </li>  
                             <li class="list-group-item collapse" id="PJ" th:unless="${#ctx.tipo == T(com.app.sistconApp.modelo.enums.TipoPessoa).J}">
-							<p class="text-primary">
+							<p class="text-success">
 								<i class="fas fa-user-tie"></i> Informações principais
 							</p>
 							<div class="form-row">
@@ -179,7 +179,7 @@
 							</div>
 						</li>
                             <li class="list-group-item">
-                                <p class="text-primary">
+                                <p class="text-success">
                                     <i class="fas fa-envelope"></i> Dados de contato
                                 </p>
                                 <div class="form-group">
@@ -198,7 +198,7 @@
                                 </div>
                             </li>
                             <li class="list-group-item">
-                                <p class="text-primary">
+                                <p class="text-success">
                                     <i class="fas fa-map-marker-alt"></i> Residência
                                 </p>
                                 <div class="form-row">
@@ -242,7 +242,7 @@
 
                             </li>
                             <li class="list-group-item form-list">
-                                <p class="text-primary">
+                                <p class="text-success">
                                     <i class="fas fa-home"></i> Moradias relacionadas
                                 </p>
                                 <div class="table-responsive">
