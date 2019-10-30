@@ -36,7 +36,7 @@ public class Bloco implements Serializable, Comparable<Bloco>{
 	@Column(name = "idbloco")
 	private Long idBloco;
 
-	@Size(min = 1, max = 3)
+	@Size(min = 1, max = 5)
 	@NotBlank
 	private String sigla;
 

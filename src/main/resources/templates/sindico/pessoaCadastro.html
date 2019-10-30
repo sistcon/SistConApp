@@ -223,7 +223,7 @@
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-4">
-                                        <label>CEP <a class="text-secondary" tabindex="-1" href="http://www.buscacep.correios.com.br/sistemas/buscacep/buscaCep.cfm" title="Não sei o CEP" target="_blank"><i class="fas fa-question-circle"></i></a></label> <input class="form-control" type="number" th:errorclass="is-invalid" th:field="*{cep}" placeholder="O CEP do condômino" />
+                                        <label>CEP <a class="text-success" tabindex="-1" href="http://www.buscacep.correios.com.br/sistemas/buscacep/buscaCep.cfm" title="Não sei o CEP" target="_blank"><i class="fas fa-question-circle"></i></a></label> <input class="form-control" type="number" th:errorclass="is-invalid" th:field="*{cep}" placeholder="O CEP do condômino" />
                                         <div class="invalid-feedback" th:errors="*{cep}"></div>
                                         <small>Somente números</small>
                                     </div>
@@ -330,8 +330,8 @@
                         </ul>
                     </div>
                 </fieldset>
-                <button th:unless="${param.somenteLeitura}" type="submit" class="btn btn-primary">Salvar</button>
-                <a class="btn btn-secondary" th:href="@{/sindico/condominos}" role="button" th:text="${param.somenteLeitura}?'Voltar':_">Cancelar</a>
+                <button th:unless="${param.somenteLeitura}" type="submit" class="btn btn-success">Salvar</button>
+                <a class="btn btn-danger" th:href="@{/sindico/condominos}" role="button" th:text="${param.somenteLeitura}?'Voltar':_">Cancelar</a>
             </form>
         </main>
     </th:block>

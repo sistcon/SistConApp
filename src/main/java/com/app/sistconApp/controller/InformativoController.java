@@ -33,7 +33,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @author Jadna Cavalcante
  */
 @Controller
-@RequestMapping("sindico/informativos")
+@RequestMapping({"sindico/informativos","condomino/informativos"})
 public class InformativoController {
     
     @Autowired
@@ -41,7 +41,7 @@ public class InformativoController {
     
     @ModelAttribute("ativo")
 	public String[] ativo() {
-		return new String[] { "condominio", "reservas" };
+		return new String[] { "condominio", "informativos" };
 	}
         
         @ModelAttribute("tipos")

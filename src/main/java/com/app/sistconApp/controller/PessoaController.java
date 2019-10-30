@@ -34,9 +34,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping({"sindico/pessoas","condomino/pessoas"})
+@RequestMapping({"sindico/pessoas","sindico/condominos"})
 public class PessoaController {
-
+//@RequestMapping({"sindico/pessoas","condomino/pessoas"})
     @Autowired
     private PessoaService pessoaService;
 
